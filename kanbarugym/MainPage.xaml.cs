@@ -9,16 +9,15 @@
             InitializeComponent();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        private void OnStartClicked(object sender, EventArgs e)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            // Solución para CS0618 y CS8602:
+            // Usar Windows[0].Page para cambiar la página raíz de la ventana principal.
+            var app = Application.Current;
+            if (app != null && app.Windows.Count > 0 && app.Windows[0] != null)
+            {
+                app.Windows[0].Page = new Login();
+            }
         }
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kanbarugym.Login"
+             BackgroundColor="#F0F0F0"
+             Title="Login">
+    <VerticalStackLayout
+          VerticalOptions="Center"
+        Padding="24,0"
+        >
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Iniciar "
+                  TextDecorations="Underline"
+                  FontAttributes="Bold"
+                  FontSize="24"
+                  TextColor="Black"/>
+                    <Span Text="sesión"
+                  FontAttributes="Bold"
+                  FontSize="24"
+                  TextColor="Black"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Border  Stroke="Black"
+        StrokeShape="RoundRectangle 10"
+        StrokeThickness="1"
+                 Margin="0,20"
+        >
+            <Entry Placeholder="Correo electrónico"
+       Keyboard="Email"
+       MaxLength="50"
+       TextColor="Black"
+       FontSize="13"      
+       ClearButtonVisibility="WhileEditing"/>
+        </Border>
+        <Border  Stroke="Black"
+ StrokeShape="RoundRectangle 10"
+ StrokeThickness="1"
+ >
+            <Entry Placeholder="Contraseña"
+Keyboard="Password"
+MaxLength="50"
+TextColor="Black"
+FontSize="13"
+                   IsPassword="True"
+ClearButtonVisibility="WhileEditing"/>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>
