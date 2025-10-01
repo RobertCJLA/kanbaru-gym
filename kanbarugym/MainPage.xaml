@@ -37,7 +37,7 @@
             <Button Text="Comenzar"
                     BackgroundColor="White"
                     TextColor="#2196F3"
-                    CornerRadius="20"
+                    CornerRadius="10"
                     HeightRequest="45"
                     FontAttributes="Bold"
                     Clicked="OnStartClicked"/>

@@ -47,5 +47,15 @@ FontSize="13"
                    IsPassword="True"
 ClearButtonVisibility="WhileEditing"/>
         </Border>
+        
+        <Button 
+            Text="Comenzar"
+            BackgroundColor="#0595EC"
+            TextColor="#ffffff"
+            CornerRadius="10"
+            HeightRequest="45"
+            FontAttributes="Bold"
+            Margin="0, 20"
+            />
     </VerticalStackLayout>
 </ContentPage>
