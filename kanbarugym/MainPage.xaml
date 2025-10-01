@@ -41,15 +41,6 @@
                     <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4"
                              BackgroundColor="White" Opacity="0.3" Margin="3"/>
                 </Grid>
-
-                <!-- Botón continuar -->
-                <Button Text="Comenzar"
-                        BackgroundColor="White"
-                        TextColor="#2196F3"
-                        CornerRadius="10"
-                        HeightRequest="45"
-                        FontAttributes="Bold"
-                        Clicked="OnStartClicked"/>
             </StackLayout>
         </Grid>
     </Grid>
