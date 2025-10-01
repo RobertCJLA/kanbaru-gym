@@ -4,8 +4,9 @@
              x:Class="kanbarugym.Login"
              BackgroundColor="#F0F0F0"
              Title="Login">
+    
     <VerticalStackLayout
-          VerticalOptions="Center"
+        VerticalOptions="Center"
         Padding="24,0"
         >
         <Label>
@@ -23,31 +24,50 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>
-        <Border  Stroke="Black"
-        StrokeShape="RoundRectangle 10"
-        StrokeThickness="1"
-                 Margin="0,20"
-        >
-            <Entry Placeholder="Correo electrónico"
-       Keyboard="Email"
-       MaxLength="50"
-       TextColor="Black"
-       FontSize="13"      
-       ClearButtonVisibility="WhileEditing"/>
+
+        <Border Stroke="#72C9F4"
+            StrokeShape="RoundRectangle 10"
+            StrokeThickness="1"
+            Margin="0,20,0,0">
+    <HorizontalStackLayout VerticalOptions="Center" Spacing="8" Padding="5,0">
+        <Image Source="user.png"
+               HeightRequest="24"
+               WidthRequest="24"
+               VerticalOptions="Center"/>
+        <Entry Placeholder="Correo electrónico"
+               Keyboard="Email"
+               MaxLength="50"
+               TextColor="Black"
+               FontSize="13"
+               ClearButtonVisibility="WhileEditing"
+               BackgroundColor="Transparent"/>
+    </HorizontalStackLayout>
+</Border>
+
+        <Border Stroke="#72C9F4"
+            StrokeShape="RoundRectangle 10"
+            StrokeThickness="1"
+            Margin="0,10,0,0">
+            <HorizontalStackLayout VerticalOptions="Center" Spacing="8" Padding="5,0">
+                <Image Source="lock.png"
+       HeightRequest="24"
+       WidthRequest="24"
+       VerticalOptions="Center"/>
+                <Entry Placeholder="Contraseña"
+       Margin="20,0"
+   Keyboard="Password"
+   MaxLength="50"
+   TextColor="Black"
+   FontSize="13"
+   IsPassword="True"
+   ClearButtonVisibility="WhileEditing"
+   BackgroundColor="Transparent"
+ 
+       />
+            </HorizontalStackLayout>
+            
         </Border>
-        <Border  Stroke="Black"
- StrokeShape="RoundRectangle 10"
- StrokeThickness="1"
- >
-            <Entry Placeholder="Contraseña"
-Keyboard="Password"
-MaxLength="50"
-TextColor="Black"
-FontSize="13"
-                   IsPassword="True"
-ClearButtonVisibility="WhileEditing"/>
-        </Border>
-        
+
         <Button 
             Text="Comenzar"
             BackgroundColor="#0595EC"
@@ -55,7 +75,6 @@ ClearButtonVisibility="WhileEditing"/>
             CornerRadius="10"
             HeightRequest="45"
             FontAttributes="Bold"
-            Margin="0, 20"
-            />
+            Margin="0,20,0,0"/>
     </VerticalStackLayout>
 </ContentPage>
