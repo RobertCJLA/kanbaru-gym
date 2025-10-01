@@ -1,46 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BackgroundColor="#0595EC"
              NavigationPage.HasNavigationBar="False"
              x:Class="kanbarugym.MainPage">
-    <Grid Padding="30">
-        <!-- Imagen ilustración -->
-        <!-- <Image Source="gym.png"
-               Aspect="AspectFit"
-               VerticalOptions="Center"
-               HeightRequest="250" /> -->
 
-        <!-- Contenido inferior -->
-        <StackLayout VerticalOptions="End" Spacing="15">
-            <Label Text="GIMX"
-                   FontSize="36"
-                   FontAttributes="Bold"
-                   TextColor="White"/>
+    <Grid>
+        <!-- Imagen de fondo sin opacidad -->
+        <Image Source="fondo.png"
+               Aspect="AspectFill"
+               HorizontalOptions="Fill"
+               VerticalOptions="Fill" />
 
-            <Label Text="Donde la disciplina se convierte en resultados"
-                   FontSize="18"
-                   TextColor="White"
-                   HorizontalTextAlignment="Start"/>
+        <!-- Contenido -->
+        <Grid Padding="30">
+            <StackLayout VerticalOptions="Start" Spacing="10" Margin="0,80,0,0">
+                <!-- Título -->
+                <Label Text="GIMX"
+                       FontSize="36"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalTextAlignment="Start"/>
 
-            <!-- Indicadores -->
-            <Grid HorizontalOptions="Center" Margin="0,20,0,0">
-                <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4"
-                         BackgroundColor="White" Opacity="0.7" Margin="3"/>
-                <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4"
-                         BackgroundColor="White" Opacity="0.3" Margin="3"/>
-                <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4"
-                         BackgroundColor="White" Opacity="0.3" Margin="3"/>
-            </Grid>
+                <!-- Subtítulo -->
+                <Label Text="Donde la disciplina
+                       
+                       se convierte en resultados"
+                       FontSize="18"
+                       TextColor="White"
+                       HorizontalTextAlignment="Start"/>
+            </StackLayout>
 
-            <!-- Botón continuar -->
-            <Button Text="Comenzar"
-                    BackgroundColor="White"
-                    TextColor="#2196F3"
-                    CornerRadius="10"
-                    HeightRequest="45"
-                    FontAttributes="Bold"
-                    Clicked="OnStartClicked"/>
-        </StackLayout>
+            <!-- Contenido inferior -->
+            <StackLayout VerticalOptions="End" Spacing="15">
+                <!-- Indicadores -->
+                <Grid HorizontalOptions="Center" Margin="0,20,0,0">
+                    <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4"
+                             BackgroundColor="White" Opacity="0.7" Margin="3"/>
+                    <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4"
+                             BackgroundColor="White" Opacity="0.3" Margin="3"/>
+                    <BoxView WidthRequest="8" HeightRequest="8" CornerRadius="4"
+                             BackgroundColor="White" Opacity="0.3" Margin="3"/>
+                </Grid>
+
+                <!-- Botón continuar -->
+                <Button Text="Comenzar"
+                        BackgroundColor="White"
+                        TextColor="#2196F3"
+                        CornerRadius="10"
+                        HeightRequest="45"
+                        FontAttributes="Bold"
+                        Clicked="OnStartClicked"/>
+            </StackLayout>
+        </Grid>
     </Grid>
 </ContentPage>
