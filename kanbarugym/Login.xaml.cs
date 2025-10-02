@@ -16,7 +16,7 @@ public partial class Login : ContentPage
         var app = Application.Current;
         if (app != null && app.Windows.Count > 0 && app.Windows[0] != null)
         {
-            app.Windows[0].Page = new PanelAdministrativo();
+            app.Windows[0].Page = new NavigationPage(new PanelAdministrativo());
         }
     }
 }

@@ -14,7 +14,7 @@
             TextDecorations="Underline"
             TextColor="Black"
             HorizontalOptions="Center" />
-        <Grid RowSpacing="10" ColumnSpacing="10">
+        <Grid RowSpacing="10" ColumnSpacing="10" Margin="0,20">
             <!-- Definimos 2 columnas de igual tamaño (50%) -->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -161,7 +161,7 @@
 
             </Grid>
             <Border.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnRegisterClient"/>
+                <TapGestureRecognizer Tapped="OnRegisterCouch"/>
             </Border.GestureRecognizers>
         </Border>
     </VerticalStackLayout>
