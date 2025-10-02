@@ -8,12 +8,14 @@
     <NavigationPage.TitleView>
         <Label Text="Registrar nuevo cliente" 
                    FontSize="26"
-                   Padding="0,10,0,0"
+                   Padding="0,10,5,0"
                    FontAttributes="Bold" 
                    TextColor="Black"
                    TextDecorations="Underline"/>
     </NavigationPage.TitleView>
 
+    <ScrollView>
+    
     <VerticalStackLayout Margin="0,10,0,0">
             <Label Text="Nombres y Apellido"
                    FontSize="16"
@@ -33,7 +35,8 @@
                             Radius="5"/>
                 </Border.Shadow>
                 <Entry Placeholder="Ingrese un nombre"
-                       WidthRequest="350"
+                       HorizontalOptions="Fill"
+                       Margin="10,0"
                        x:Name="txtNombreCliente"
                        Keyboard="Text"
                        MaxLength="50"
@@ -53,6 +56,7 @@
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="1"
                     BackgroundColor="#fff">
+                    
                 <Border.Shadow>
                     <Shadow Brush="Black"
                             Opacity="0.09"
@@ -60,7 +64,8 @@
                             Radius="5"/>
                 </Border.Shadow>
                 <Entry Placeholder="DD/MM/AAAA"
-                       WidthRequest="350"
+                       HorizontalOptions="Fill"
+                       Margin="10,0,10,0"
                        x:Name="txtFechaNacimiento"
                        Keyboard="Date"
                        MaxLength="50"
@@ -79,6 +84,7 @@
             <Border Stroke="#72C9F4"
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="1"
+                    Padding="5,0"
                     BackgroundColor="#fff">
                 <Border.Shadow>
                     <Shadow Brush="Black"
@@ -87,11 +93,11 @@
                             Radius="5"/>
                 </Border.Shadow>
 
-                <HorizontalStackLayout Margin="5,0">
-                    
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+
                     <Picker Title="Selecciona una opción"
+                            Grid.Column="0"
                         x:Name="cmbsexo"
-                        WidthRequest="325"
                         FontSize="13"
                         TextColor="Black"
                         TitleColor="Gray"
@@ -107,12 +113,14 @@
                         </Picker.ItemsSource>
                     </Picker>
                     <Image Source="sex.svg"
+                           Grid.Column="1"
        HeightRequest="25"
        WidthRequest="25"
        VerticalOptions="Center"
+                           HorizontalOptions="End"
        Margin="5,0,5,0"/>
-                    
-                </HorizontalStackLayout>
+
+                </Grid>
             </Border>
             <Label Text="Correo lectrónico"
        FontSize="16"
@@ -132,7 +140,8 @@
                 Radius="5"/>
                 </Border.Shadow>
                 <Entry Placeholder="ejemplo@ejemplo.com"
-           WidthRequest="350"
+           HorizontalOptions="Fill"
+                       Margin="10,0"
            x:Name="txtNECliente"
            Keyboard="Email"
            MaxLength="50"
@@ -158,7 +167,8 @@
                 Radius="5"/>
                 </Border.Shadow>
                 <Entry Placeholder="(123) 456-7890"
-           WidthRequest="350"
+           HorizontalOptions="Fill"
+                       Margin="10,0"
            x:Name="txtNTClient"
            Keyboard="Telephone"
            MaxLength="50"
@@ -168,40 +178,46 @@
             </Border>
 
 
-            <HorizontalStackLayout Padding="0,30">
-            <Button Text="Cancelar"
-    BackgroundColor="#FEC2AA"
-    TextColor="#ffffff"
-    CornerRadius="10"
-    HeightRequest="45"
-                    WidthRequest="185"
-    FontAttributes="Bold">
-                <Button.Shadow>
-                    <Shadow Brush="Black"
-            Opacity="0.09"
-            Offset="0,0"
-            Radius="5"/>
-                </Button.Shadow>
-            </Button>
+            <Grid ColumnDefinitions="*,*"
+      Padding="0,25"
+      ColumnSpacing="10">
 
-            <Button Text="Siguiente"
-    BackgroundColor="#0595EC"
-    TextColor="#ffffff"
-    CornerRadius="10"
-    HeightRequest="45"
-                    Margin="10,0,0,0"
-                    WidthRequest="185"
-    FontAttributes="Bold">
-                <Button.Shadow>
-                    <Shadow Brush="Black"
-            Opacity="0.09"
-            Offset="0,0"
-            Radius="5"/>
-                </Button.Shadow>
-            </Button>
+                <Button Grid.Column="0"
+            Text="Cancelar" 
+            BackgroundColor="#FEC2AA"
+            TextColor="#ffffff"
+            CornerRadius="10"
+            HeightRequest="45"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                    Opacity="0.09"
+                    Offset="0,0"
+                    Radius="5"/>
+                    </Button.Shadow>
+                </Button>
 
-        </HorizontalStackLayout>
+                <Button Grid.Column="1"
+            Text="Siguiente"
+            BackgroundColor="#0595EC"
+            TextColor="#ffffff"
+            CornerRadius="10"
+            HeightRequest="45"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                    Opacity="0.09"
+                    Offset="0,0"
+                    Radius="5"/>
+                    </Button.Shadow>
+                </Button>
+            </Grid>
+
         </VerticalStackLayout>
-
+</ScrollView>
 
 </ContentPage>
