@@ -2,10 +2,14 @@
     <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
              x:Class="kanbarugym.PanelAdministrativo"  
-             BackgroundColor="#F0F0F0"  
-             Padding="5"  
-             Title="PanelAdministrativo">  
-    <VerticalStackLayout>  
+             BackgroundColor="#fff"
+             Title="Panel administrativo"
+             >
+
+
+    <VerticalStackLayout
+        VerticalOptions="Fill"
+        Padding="15,0">  
         <Label   
             Text="Panel administrativo"  
             VerticalOptions="Center"   
@@ -13,8 +17,8 @@
             FontAttributes="Bold"  
             TextDecorations="Underline"  
             TextColor="Black"  
-                HorizontalOptions="Center" />  
-        <Grid RowSpacing="10" ColumnSpacing="10" Margin="0,20">  
+            HorizontalOptions="Center" />  
+        <Grid RowSpacing="10" ColumnSpacing="10" Margin="0,20,0,0">  
             <!-- Definimos 2 columnas de igual tamaño (50%) -->  
             <Grid.ColumnDefinitions>  
                 <ColumnDefinition Width="*" />  
@@ -85,7 +89,7 @@
         <Border Stroke="#2196F3"  
                 StrokeThickness="0"  
                 Background="#2196F3"  
-                Margin="0,5"  
+                Margin="0,10"
                 Padding="10"  
                 StrokeShape="RoundRectangle 15">  
             <Grid ColumnDefinitions="Auto, *"  
@@ -126,12 +130,11 @@
         <Border Stroke="#2196F3"  
          StrokeThickness="0"  
          Background="#2196F3"  
-         Margin="0,5"  
          Padding="10"  
          StrokeShape="RoundRectangle 15">  
             <Grid ColumnDefinitions="Auto, *"  
            VerticalOptions="Center"  
-           HorizontalOptions="Fill">  
+           HorizontalOptions="Fill">    
                 <Border WidthRequest="50"  
                  HeightRequest="50"  
                  Background="#42A5F5"
