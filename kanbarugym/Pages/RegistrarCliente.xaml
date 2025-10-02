@@ -1,12 +1,223 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kanbarugym.Pages.RegistrarCliente"
-             Title="RegistrarCliente">
-    <VerticalStackLayout>
-        <Label 
-            Text="Registrar cliente"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Registrar nuevo cliente"
+             Padding="15,0">
+
+    <NavigationPage.TitleView>
+        <Label Text="Registrar nuevo cliente" 
+                   FontSize="26"
+                   Padding="0,10,5,0"
+                   FontAttributes="Bold" 
+                   TextColor="Black"
+                   TextDecorations="Underline"/>
+    </NavigationPage.TitleView>
+
+    <ScrollView>
+    
+    <VerticalStackLayout Margin="0,10,0,0">
+            <Label Text="Nombres y Apellido"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.09"
+                            Offset="0,0"
+                            Radius="5"/>
+                </Border.Shadow>
+                <Entry Placeholder="Ingrese un nombre"
+                       HorizontalOptions="Fill"
+                       Margin="10,0"
+                       x:Name="txtNombreCliente"
+                       Keyboard="Text"
+                       MaxLength="50"
+                       TextColor="Black"
+                       FontSize="13"
+                       ClearButtonVisibility="WhileEditing"/>
+            </Border>
+
+            <Label Text="Fecha de Nacimiento"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff">
+                    
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.09"
+                            Offset="0,0"
+                            Radius="5"/>
+                </Border.Shadow>
+                <Entry Placeholder="DD/MM/AAAA"
+                       HorizontalOptions="Fill"
+                       Margin="10,0,10,0"
+                       x:Name="txtFechaNacimiento"
+                       Keyboard="Date"
+                       MaxLength="50"
+                       TextColor="Black"
+                       FontSize="13"
+                       ClearButtonVisibility="WhileEditing"/>
+            </Border>
+
+            <Label Text="Sexo"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="5,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.09"
+                            Offset="0,0"
+                            Radius="5"/>
+                </Border.Shadow>
+
+                <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+
+                    <Picker Title="Selecciona una opción"
+                            Grid.Column="0"
+                        x:Name="cmbsexo"
+                        FontSize="13"
+                        TextColor="Black"
+                        TitleColor="Gray"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Fill"
+                        Margin="5,0">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Masculino</x:String>
+                                <x:String>Femenino</x:String>
+                                <x:String>Prefiero no decirlo</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Image Source="sex.svg"
+                           Grid.Column="1"
+       HeightRequest="25"
+       WidthRequest="25"
+       VerticalOptions="Center"
+                           HorizontalOptions="End"
+       Margin="5,0,5,0"/>
+
+                </Grid>
+            </Border>
+            <Label Text="Correo lectrónico"
+       FontSize="16"
+       FontAttributes="Bold"
+       TextColor="Black"
+       HorizontalOptions="Start"
+       Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+        StrokeShape="RoundRectangle 10"
+        StrokeThickness="1"
+        BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                Opacity="0.09"
+                Offset="0,0"
+                Radius="5"/>
+                </Border.Shadow>
+                <Entry Placeholder="ejemplo@ejemplo.com"
+           HorizontalOptions="Fill"
+                       Margin="10,0"
+           x:Name="txtNECliente"
+           Keyboard="Email"
+           MaxLength="50"
+           TextColor="Black"
+           FontSize="13"
+           ClearButtonVisibility="WhileEditing"/>
+            </Border>
+            <Label Text="Número de teléfono"
+       FontSize="16"
+       FontAttributes="Bold"
+       TextColor="Black"
+       HorizontalOptions="Start"
+       Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+        StrokeShape="RoundRectangle 10"
+        StrokeThickness="1"
+        BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                Opacity="0.09"
+                Offset="0,0"
+                Radius="5"/>
+                </Border.Shadow>
+                <Entry Placeholder="(123) 456-7890"
+           HorizontalOptions="Fill"
+                       Margin="10,0"
+           x:Name="txtNTClient"
+           Keyboard="Telephone"
+           MaxLength="50"
+           TextColor="Black"
+           FontSize="13"
+           ClearButtonVisibility="WhileEditing"/>
+            </Border>
+
+
+            <Grid ColumnDefinitions="*,*"
+      Padding="0,25"
+      ColumnSpacing="10">
+
+                <Button Grid.Column="0"
+            Text="Cancelar" 
+            BackgroundColor="#FEC2AA"
+            TextColor="#ffffff"
+            CornerRadius="10"
+            HeightRequest="45"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                    Opacity="0.09"
+                    Offset="0,0"
+                    Radius="5"/>
+                    </Button.Shadow>
+                </Button>
+
+                <Button Grid.Column="1"
+            Text="Siguiente"
+            BackgroundColor="#0595EC"
+            TextColor="#ffffff"
+            CornerRadius="10"
+            HeightRequest="45"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                    Opacity="0.09"
+                    Offset="0,0"
+                    Radius="5"/>
+                    </Button.Shadow>
+                </Button>
+            </Grid>
+
+        </VerticalStackLayout>
+</ScrollView>
+
 </ContentPage>

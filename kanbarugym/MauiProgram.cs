@@ -2,6 +2,7 @@
 using Microsoft.Maui.Handlers;
 
 #if ANDROID
+using Android.Graphics.Drawables;
 using Android.Widget;
 #endif
 
@@ -18,15 +19,25 @@ namespace kanbarugym
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+
+                    fonts.AddFont("Ubuntu-Regular.ttf", "UbuntuRegular");
+                    fonts.AddFont("Ubuntu-Bold.ttf", "UbuntuBold");
                 });
 
 #if ANDROID
+            // Quitar underline en Entry
             EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
             {
                 if (handler.PlatformView is EditText editText)
                 {
-                    editText.Background = null; // quita el underline
+                    editText.Background = null;
                 }
+            });
+
+            // Quitar underline en Picker
+            PickerHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+            {
+                handler.PlatformView.Background = new ColorDrawable(Android.Graphics.Color.Transparent);
             });
 #endif
 
