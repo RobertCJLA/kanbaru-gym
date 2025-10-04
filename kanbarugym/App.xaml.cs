@@ -1,15 +1,17 @@
-﻿namespace kanbarugym
-{
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-        }
+﻿
+using kanbarugym.Views;
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new MainPage());
-        }
+namespace kanbarugym;
+
+public partial class App : Application
+{
+    public App()
+    {
+        InitializeComponent();
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new MainPage());
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace kanbarugym
+﻿namespace kanbarugym.Views
 {
     public partial class MainPage : ContentPage
     {

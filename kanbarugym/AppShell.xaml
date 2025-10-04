@@ -1,14 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="kanbarugym.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:kanbarugym"
-    Title="kanbarugym">
+    xmlns:views="clr-namespace:kanbarugym.Views"
+    Title="kanbarugym"
+    Shell.TabBarBackgroundColor="#CEF4FE"
+    Shell.TabBarForegroundColor="#0595EC"
+    Shell.TabBarTitleColor="#0595EC"
+    Shell.TabBarUnselectedColor="#000">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+
+        <Tab Title="Inicio" Icon="home.png">
+
+            <ShellContent ContentTemplate="{DataTemplate views:PanelAdministrativo}" Route="PanelAdministrativo"/>
+        </Tab>
+
+        <Tab Title="Clientes" Icon="client.png">
+            <ShellContent ContentTemplate="{DataTemplate views:Clients}" Route="Clients" />
+        </Tab>
+
+        <Tab Title="Entranador" Icon="trainer.png">
+            <ShellContent ContentTemplate="{DataTemplate views:Trainer}" Route="Trainer" />
+        </Tab>
+
+        <Tab Title="Membresías" Icon="clipboard.png">
+            <ShellContent ContentTemplate="{DataTemplate views:Membership}" Route="Membership" />
+        </Tab>
+
+    </TabBar>
 
 </Shell>
