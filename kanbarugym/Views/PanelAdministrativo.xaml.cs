@@ -1,6 +1,7 @@
 using kanbarugym.Pages;
+using kanbarugym.Views;
 
-namespace kanbarugym;
+namespace kanbarugym.Views;
 
 public partial class PanelAdministrativo : ContentPage
 {
@@ -8,6 +9,7 @@ public partial class PanelAdministrativo : ContentPage
 	{
 		InitializeComponent();
 	}
+
 	private void OnRegisterClient(object sender, EventArgs e)
 	{
 		Navigation.PushAsync(new RegistrarCliente());
