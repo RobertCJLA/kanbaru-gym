@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8" ?>
-    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
              x:Class="kanbarugym.Views.PanelAdministrativo"  
              BackgroundColor="#fff"
              Title="Panel administrativo"
              >
 
-    <NavigationPage.TitleView>
-        <Label Text="Panel administrativo" 
+    <Shell.TitleView>
+        <Grid>
+            <VerticalStackLayout Margin="0,7,15,0">
+                <Label Text="Panel administrativo"
                    FontSize="32"
-                   Padding="0,15,15,0"
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"
                    FontAttributes="Bold" 
                    TextColor="Black"
                    HorizontalOptions="Fill"
-                   VerticalOptions="Fill"
-                   TextDecorations="Underline"/>
-    </NavigationPage.TitleView>
+                   VerticalOptions="Fill"/>
+                <Border StrokeThickness="0"
+                    BackgroundColor="#0595EC"
+                    StrokeShape="RoundRectangle 100,100"
+                    HeightRequest="5"
+                    WidthRequest="310"
+                    HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.TitleView>
+
 
     <ScrollView>
     <VerticalStackLayout

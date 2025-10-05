@@ -25,7 +25,7 @@ namespace kanbarugym
                 });
 
 #if ANDROID
-            // Quitar underline en Entry
+            
             EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
             {
                 if (handler.PlatformView is EditText editText)
@@ -34,7 +34,7 @@ namespace kanbarugym
                 }
             });
 
-            // Quitar underline en Picker
+            
             PickerHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
             {
                 handler.PlatformView.Background = new ColorDrawable(Android.Graphics.Color.Transparent);
