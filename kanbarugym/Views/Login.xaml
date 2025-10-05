@@ -6,12 +6,12 @@
              Title="Login">
 
 
-    <ScrollView VerticalOptions="Fill"
+    <ScrollView VerticalOptions="Center"
                 HorizontalOptions="Center"
                 InputTransparent="False">
         <Grid VerticalOptions="Fill" HorizontalOptions="Fill">
             <VerticalStackLayout
-                 VerticalOptions="Center"
+                 HeightRequest="350"
                  Padding="24,0"
                  Spacing="15">
 
@@ -60,42 +60,42 @@
                 </Border>
 
                 <Border Stroke="#72C9F4"
-        StrokeShape="RoundRectangle 10"
-        StrokeThickness="1"
-        BackgroundColor="#fff"
-        HorizontalOptions="Fill"
-        Padding="5,0">
+                        StrokeShape="RoundRectangle 10"
+                        StrokeThickness="1"
+                        BackgroundColor="#fff"
+                        HorizontalOptions="Fill"
+                        Padding="5,0">
 
                     <Border.Shadow>
                         <Shadow Brush="Black"
-                Opacity="0.09"
-                Offset="0,0"
-                Radius="5"/>
+                                Opacity="0.09"
+                                Offset="0,0"
+                                Radius="5"/>
                     </Border.Shadow>
 
                     <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
-                        <!-- Columna fija para el ícono -->
+                        
                         <Image Grid.Column="0"
-               Source="lock.png"
-               HeightRequest="20"
-               WidthRequest="20"
-               VerticalOptions="Center"
-               Margin="5,0"/>
+                               Source="lock.png"
+                               HeightRequest="20"
+                               WidthRequest="20"
+                               VerticalOptions="Center"
+                               Margin="5,0"/>
 
-                        <!-- Columna expandible para el Entry -->
+                        
                         <Entry Grid.Column="1"
-               Placeholder="Contraseña"
-               Margin="5,0"
-               x:Name="txtPassword"
-               Keyboard="Default"
-               MaxLength="50"
-               TextColor="Black"
-               FontSize="13"
-               IsPassword="True"
-               ClearButtonVisibility="WhileEditing"
-               BackgroundColor="Transparent"
-               HorizontalOptions="Fill"
-               VerticalOptions="Center"/>
+                               Placeholder="Contraseña"
+                               Margin="5,0"
+                               x:Name="txtPassword"
+                               Keyboard="Default"
+                               MaxLength="50"
+                               TextColor="Black"
+                               FontSize="13"
+                               IsPassword="True"
+                               ClearButtonVisibility="WhileEditing"
+                               BackgroundColor="Transparent"
+                               HorizontalOptions="Fill"
+                               VerticalOptions="Center"/>
                     </Grid>
                 </Border>
 
