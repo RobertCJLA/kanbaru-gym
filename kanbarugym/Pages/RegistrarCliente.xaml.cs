@@ -6,4 +6,10 @@ public partial class RegistrarCliente : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void OnMemberShip(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new NuevaMembresia());
+    }
+
 }
