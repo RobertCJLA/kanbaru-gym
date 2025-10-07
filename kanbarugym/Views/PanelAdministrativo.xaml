@@ -7,10 +7,10 @@
              >
 
     <Shell.TitleView>
-        <Grid>
+        <Grid BackgroundColor="White">
             <VerticalStackLayout Margin="0,7,15,0">
                 <Label Text="Panel administrativo"
-                   FontSize="32"
+                   FontSize="26"
                    HorizontalTextAlignment="Center"
                    VerticalTextAlignment="Center"
                    FontAttributes="Bold" 

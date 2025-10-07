@@ -20,7 +20,7 @@
             <ShellContent ContentTemplate="{DataTemplate views:Clients}" Route="Clients" />
         </Tab>
 
-        <Tab Title="Entranador" Icon="trainer.png">
+        <Tab Title="Entrenador" Icon="trainer.png">
             <ShellContent ContentTemplate="{DataTemplate views:Trainer}" Route="Trainer" />
         </Tab>
 
