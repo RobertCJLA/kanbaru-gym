@@ -3,17 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kanbarugym.Pages.RegistrarCliente"
              Title="Registrar nuevo cliente"
+             BackgroundColor="White"
              Padding="15,0">
 
     <Shell.TitleView>
-        <Grid>
+        <Grid BackgroundColor="White">
             <VerticalStackLayout Margin="0,10,0,0">
                 <Label Text="Registrar nuevo cliente" 
                    FontSize="22"
                    FontAttributes="Bold" 
                    Padding="22,0,0,0"
                    TextColor="Black"/>
-                   
+
                 <Border StrokeThickness="0"
                         Margin="0,0,61,0"
                    BackgroundColor="#0595EC"
@@ -26,8 +27,8 @@
     </Shell.TitleView>
 
     <ScrollView>
-    
-    <VerticalStackLayout Margin="0,10,0,0">
+
+        <VerticalStackLayout Margin="0,10,0,0">
             <Label Text="Nombres y Apellido"
                    FontSize="16"
                    FontAttributes="Bold"
@@ -67,18 +68,18 @@
                     StrokeShape="RoundRectangle 10"
                     StrokeThickness="1"
                     BackgroundColor="#fff">
-                    
+
                 <Border.Shadow>
                     <Shadow Brush="Black"
                             Opacity="0.1"
                             Offset="0,0"
                             Radius="5"/>
                 </Border.Shadow>
-                <Entry Placeholder="DD/MM/AAAA"
+                <Entry Placeholder="YYYY-MM-DD"
                        HorizontalOptions="Fill"
                        Margin="10,0,10,0"
                        x:Name="txtFechaNacimiento"
-                       Keyboard="Date"
+                       Keyboard="Text"
                        MaxLength="50"
                        TextColor="Black"
                        FontSize="13"
@@ -118,7 +119,6 @@
                                 <x:Array Type="{x:Type x:String}">
                                     <x:String>Masculino</x:String>
                                     <x:String>Femenino</x:String>
-                                    <x:String>Trans-Former</x:String>
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>
@@ -177,7 +177,7 @@ Margin="5,0,5,0"/>
                 Offset="0,0"
                 Radius="5"/>
                 </Border.Shadow>
-                <Entry Placeholder="(123) 456-7890"
+                <Entry Placeholder="12345678"
            HorizontalOptions="Fill"
                        Margin="10,0"
            x:Name="txtNTClient"
@@ -219,7 +219,7 @@ Margin="5,0,5,0"/>
                         FontAttributes="Bold"
                         HorizontalOptions="Fill"
                         VerticalOptions="Center"
-                        Clicked="OnMemberShip">
+                        Clicked="OnCreateCliente">
 
                     <Button.Shadow>
                         <Shadow Brush="Black"
@@ -231,6 +231,6 @@ Margin="5,0,5,0"/>
             </Grid>
 
         </VerticalStackLayout>
-</ScrollView>
+    </ScrollView>
 
 </ContentPage>
