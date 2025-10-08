@@ -1,12 +1,93 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kanbarugym.Pages.RegistrarEntrenador"
-             Title="Registrar entrenador">
-    <VerticalStackLayout>
-        <Label 
-            Text="Registrar entrenador"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Registrar nuevo entrenador"
+             BackgroundColor="White"
+             Padding="15,0">
+
+    <Shell.TitleView>
+        <Grid BackgroundColor="White">
+            <VerticalStackLayout Margin="0,10,0,0">
+                <Label Text="Registrar nuevo entrenador" 
+                       FontSize="22"
+                       FontAttributes="Bold" 
+                       Padding="22,0,0,0"
+                       TextColor="Black"/>
+                <Border StrokeThickness="0"
+                        Margin="0,0,61,0"
+                        BackgroundColor="#0595EC"
+                        StrokeShape="RoundRectangle 100,100"
+                        HeightRequest="5"
+                        WidthRequest="235"
+                        HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Margin="0,10,0,0">
+
+            <!-- Nombres y Apellidos -->
+            <Label Text="Nombres y Apellidos" />
+            <Border>
+                <Entry x:Name="txtNombreEntrenador" Placeholder="Ingrese nombre completo" />
+            </Border>
+
+            <!-- Fecha de Nacimiento -->
+            <Label Text="Fecha de Nacimiento" />
+            <Border>
+                <Entry x:Name="txtFechaNacimientoEntrenador" Placeholder="YYYY-MM-DD" />
+            </Border>
+
+            <!-- Sexo -->
+            <Label Text="Sexo" />
+            <Border>
+                <Grid ColumnDefinitions="*,Auto">
+                    <Grid>
+                        <Picker x:Name="cmbSexoEntrenador" Title="Selecciona una opción">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Masculino</x:String>
+                                    <x:String>Femenino</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Grid>
+                    <Image Source="clipborad2.png" Grid.Column="1" />
+                </Grid>
+            </Border>
+
+            <!-- Experiencia -->
+            <Label Text="Experiencia (años)" />
+            <Border>
+                <Entry x:Name="txtExperiencia" Placeholder="Ej: 5" Keyboard="Numeric" />
+            </Border>
+
+            <!-- Especialidad -->
+            <Label Text="Especialidad" />
+            <Border>
+                <Picker x:Name="cmbEspecialidad" Title="Selecciona una especialidad" ItemsSource="{Binding Especialidades}" />
+            </Border>
+
+            <!-- Correo electrónico -->
+            <Label Text="Correo electrónico" />
+            <Border>
+                <Entry x:Name="txtCorreoEntrenador" Placeholder="lagunamoises64@gmail.com" Keyboard="Email" />
+            </Border>
+
+            <!-- Teléfono -->
+            <Label Text="Número de teléfono" />
+            <Border>
+                <Entry x:Name="txtTelefonoEntrenador" Placeholder="12345678" Keyboard="Telephone" />
+            </Border>
+
+            <!-- Botones -->
+            <Grid ColumnDefinitions="*,*" Padding="0,25" ColumnSpacing="10">
+                <Button Grid.Column="0" Text="Cancelar" BackgroundColor="#FEC2AA" />
+                <Button Grid.Column="1" Text="Guardar" BackgroundColor="#0595EC" Clicked="OnCreateEntrenador" />
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
