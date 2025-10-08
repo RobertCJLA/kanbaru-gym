@@ -58,7 +58,7 @@ public partial class RegistrarCliente : ContentPage
             return;
         }
 
-        var api = new APIService();
+        var cliente = new ClientesLib();
 
         var nuevoCliente = new
         {
@@ -70,7 +70,7 @@ public partial class RegistrarCliente : ContentPage
             sexo
         };
 
-        bool response = await api.CrearCliente(nuevoCliente);
+        bool response = await ClientesLib.CrearCliente(nuevoCliente);
 
         if (response)
         {
