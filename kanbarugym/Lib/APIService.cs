@@ -15,7 +15,7 @@ namespace kanbarugym.Lib
         {
             _httpClient = new HttpClient
             {
-                BaseAddress = new Uri("http://192.168.1.29:3000/")
+                BaseAddress = new Uri("https://kanbaru-gym-server-production.up.railway.app/")
             };
         }
 
