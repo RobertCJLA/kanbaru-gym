@@ -2,6 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using Microsoft.Maui.Controls;
+using kanbarugym.Lib;
 
 namespace kanbarugym.Pages
 {
@@ -44,7 +45,7 @@ namespace kanbarugym.Pages
             }
 
             // Validar sexo
-            if (cmbSexoEntrenador.SelectedIndex == -1)
+            if (cmbSexoEntrenador.SelectedIndex == -1 || cmbSexoEntrenador.SelectedItem is not string sexo)
             {
                 await DisplayAlert("Error", "Selecciona el sexo.", "OK");
                 return;
@@ -59,7 +60,7 @@ namespace kanbarugym.Pages
             }
 
             // Validar especialidad
-            if (cmbEspecialidad.SelectedIndex == -1)
+            if (cmbEspecialidad.SelectedIndex == -1 || cmbEspecialidad.SelectedItem is not string especialidad)
             {
                 await DisplayAlert("Error", "Selecciona una especialidad.", "OK");
                 return;
@@ -81,7 +82,26 @@ namespace kanbarugym.Pages
                 return;
             }
 
-            // Si todo está bien, mostrar mensaje de éxito
+            // Construir objeto para API
+            var entrenador = new
+            {
+                Id = Guid.NewGuid().ToString(),
+                Nombres = txtNombreEntrenador.Text.Trim(),
+                FechaNacimiento = fechaNacimiento.ToString("yyyy-MM-dd"),
+                Sexo = sexo,
+                Experiencia = experiencia,
+                Especialidad = especialidad,
+                CorreoElectronico = txtCorreoEntrenador.Text.Trim(),
+                Telefono = txtTelefonoEntrenador.Text.Trim()
+            };
+
+            var (ok, error) = await EntrenadoresLib.CrearEntrenador(entrenador);
+            if (!ok)
+            {
+                await DisplayAlert("Error", $"No se pudo guardar el entrenador. Detalle: {error}", "OK");
+                return;
+            }
+
             await DisplayAlert("Éxito", "Entrenador registrado correctamente.", "OK");
 
             // Opcional: limpiar campos

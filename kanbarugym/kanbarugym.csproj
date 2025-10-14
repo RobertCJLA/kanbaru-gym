@@ -61,6 +61,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Seed\**" />
+	  <Compile Remove="Seed\**" />
+	  <EmbeddedResource Remove="Seed\**" />
+	  <MauiCss Remove="Seed\**" />
+	  <MauiXaml Remove="Seed\**" />
+	  <None Remove="Seed\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.5" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />

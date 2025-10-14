@@ -43,18 +43,29 @@
             <!-- Sexo -->
             <Label Text="Sexo" />
             <Border>
-                <Grid ColumnDefinitions="*,Auto">
-                    <Grid>
-                        <Picker x:Name="cmbSexoEntrenador" Title="Selecciona una opción">
-                            <Picker.ItemsSource>
-                                <x:Array Type="{x:Type x:String}">
-                                    <x:String>Masculino</x:String>
-                                    <x:String>Femenino</x:String>
-                                </x:Array>
-                            </Picker.ItemsSource>
-                        </Picker>
-                    </Grid>
-                    <Image Source="clipborad2.png" Grid.Column="1" />
+                <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+                    <!-- Picker en primera columna, con items definidos -->
+                    <Picker x:Name="cmbSexoEntrenador"
+                            Grid.Column="0"
+                            Title="Selecciona una opción"
+                            VerticalOptions="Center"
+                            BackgroundColor="Transparent">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Masculino</x:String>
+                                <x:String>Femenino</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <!-- Icono decorativo, no intercepta toques -->
+                    <Image Grid.Column="1"
+                           Source="clipborad2.png"
+                           HeightRequest="40"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="5,0,5,0"
+                           InputTransparent="True" />
                 </Grid>
             </Border>
 
