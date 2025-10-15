@@ -2,10 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:conv="clr-namespace:kanbarugym.Converters"
+             xmlns:viewmodels="clr-namespace:kanbarugym.ViewModels"
              x:Class="kanbarugym.Views.Clients"
              x:Name="ThisPage"
              Title="Lista de Clientes"
              BackgroundColor="White">
+
+    <ContentPage.BindingContext>
+        <viewmodels:ClientsViewModel />
+    </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -18,27 +23,26 @@
         <Grid>
             <VerticalStackLayout Margin="0,10,15,0">
                 <Label Text="Lista de clientes"
-                   FontSize="22"
-                   HorizontalTextAlignment="Center"
-                   VerticalTextAlignment="Center"
-                   FontAttributes="Bold" 
-                   TextColor="Black"
-                   HorizontalOptions="Fill"
-                   VerticalOptions="Fill"/>
+                       FontSize="22"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       HorizontalOptions="Fill"
+                       VerticalOptions="Fill"/>
                 <Border StrokeThickness="0"
                         BackgroundColor="#0595EC"
                         StrokeShape="RoundRectangle 100,100"
                         HeightRequest="5"
                         WidthRequest="165"
                         HorizontalOptions="Center" />
-
             </VerticalStackLayout>
         </Grid>
     </Shell.TitleView>
 
-    <VerticalStackLayout Padding="20,10">
+    <Grid Padding="20,10" RowDefinitions="Auto,*">
 
-        <Grid HeightRequest="45">
+        <Grid Row="0" HeightRequest="45">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="*"/>
@@ -53,14 +57,9 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
-
                 <Border.Shadow>
-                    <Shadow Brush="Black"
-                            Opacity="0.1"
-                            Offset="0,0"
-                            Radius="5"/>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5"/>
                 </Border.Shadow>
-
             </Border>
 
             <Image Source="filter.png"
@@ -86,16 +85,18 @@
                     BackgroundColor="Transparent"/>
         </Grid>
 
-        
-        <CollectionView x:Name="ClientesCollection"
-                        Margin="0,10,0,0"
-                        SelectionMode="None"
-                        ItemsSource="{Binding Clientes}">
+        <CollectionView
+            Grid.Row="1"
+            x:Name="ClientesCollection"
+            Margin="0,10,0,0"
+            ItemsSource="{Binding Clientes}"
+            SelectionMode="None">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <VerticalStackLayout>
+                    <VerticalStackLayout Padding="0,5">
+                        
                         <Grid>
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="*"/>
@@ -104,29 +105,34 @@
 
                             <Border BackgroundColor="#0595EC"
                                     Grid.Column="0"
-                                        StrokeThickness="0"
-                                        StrokeShape="Ellipse"
-                                        HeightRequest="40"
-                                        WidthRequest="40"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="Start">
+                                    StrokeThickness="0"
+                                    StrokeShape="Ellipse"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Start">
                                 <Label Text="{Binding Nombres, Converter={StaticResource LastNameInitialConverter}}"
-                                           TextColor="White"
-                                           FontAttributes="Bold"
-                                           FontSize="14"
-                                           HorizontalOptions="Center"
-                                           VerticalOptions="Center"
-                                           HorizontalTextAlignment="Center"
-                                           VerticalTextAlignment="Center"/>
+                                       TextColor="White"
+                                       FontAttributes="Bold"
+                                       FontSize="14"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"/>
                             </Border>
 
                             <Label Text="{Binding Nombres}"
-                                       FontAttributes="Bold"
+                                   FontAttributes="Bold"
                                    Grid.Column="1"
                                    Margin="5,0"
-                                       FontSize="16"
-                                       LineBreakMode="TailTruncation"
-                                       VerticalOptions="Center">
+                                   FontSize="16"
+                                   LineBreakMode="TailTruncation"
+                                   VerticalOptions="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ClientsViewModel}}, Path=ToggleExpandCommand}"
+                                        CommandParameter="{Binding}" />
+                                </Label.GestureRecognizers>
                             </Label>
 
                             <Button Grid.Column="2"
@@ -140,30 +146,23 @@
                                     HorizontalOptions="Center"/>
                         </Grid>
 
-                        <Border Margin="5,0">
+                        <Border Margin="5,0" IsVisible="{Binding IsExpanded}">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10"/>
                             </Border.StrokeShape>
-                        <VerticalStackLayout BackgroundColor="#0595EC" Padding="20,10">
-                            
-                            <Label Text="{Binding CorreoElectronico}" TextColor="{StaticResource White}" FontSize="18"/>
-                            <Label Text="{Binding Telefono}" TextColor="{StaticResource White}" FontSize="18"/>
-                            <Label Text="{Binding Sexo}" TextColor="{StaticResource White}" FontSize="18"/>
-                            <Label Text="{Binding FechaNacimiento, Converter={StaticResource AgeFromBirthdateConverter}, StringFormat='Edad: {0} años'}" TextColor="{StaticResource White}" FontSize="18"/>
-                            
-                        </VerticalStackLayout>
-
-                            
+                            <VerticalStackLayout BackgroundColor="#0595EC" Padding="20,10">
+                                <Label Text="{Binding CorreoElectronico}" TextColor="White" FontSize="18"/>
+                                <Label Text="{Binding Telefono}" TextColor="White" FontSize="18"/>
+                                <Label Text="{Binding Sexo}" TextColor="White" FontSize="18"/>
+                                <Label Text="{Binding FechaNacimiento, Converter={StaticResource AgeFromBirthdateConverter}, StringFormat='Edad: {0} años'}"
+                                       TextColor="White"
+                                       FontSize="18"/>
+                            </VerticalStackLayout>
                         </Border>
-                        
-                    </VerticalStackLayout>
-                    
-                </DataTemplate>
-                
-            </CollectionView.ItemTemplate>
-            
-        </CollectionView>
 
-    </VerticalStackLayout>
-    
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>
