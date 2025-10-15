@@ -2,13 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kanbarugym.Views.RegstrarMembresia"
-             Title="RegstrarMembresia">
+             Title="RegstrarMembresia"
+             Padding="20,0">
 
 
     <Shell.TitleView>
         <Grid BackgroundColor="White">
             <VerticalStackLayout Margin="0,10,0,0">
-                <Label Text="Registrar nuevo cliente" 
+                <Label Text="Registrar Membresia" 
                    FontSize="22"
                    FontAttributes="Bold" 
                    Padding="22,0,0,0"
@@ -156,7 +157,7 @@
 
                 </Grid>
 
-                <Image Source="flecha-hacia-abajo-para-navegar.png"
+                <Image Source="clipborad2.png"
 Grid.Column="1"
 HeightRequest="40"
 VerticalOptions="Center"

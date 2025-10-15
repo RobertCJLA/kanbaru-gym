@@ -17,6 +17,6 @@ public partial class Clients : ContentPage
 
     private void OnMemberShipPage(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new NuevaMembresia());
+        Navigation.PushAsync(new RegstrarMembresia());
     }
 }
