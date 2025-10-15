@@ -211,7 +211,7 @@ Margin="5,0,5,0"/>
                 </Button>
 
                 <Button Grid.Column="1"
-                        Text="Siguiente"
+                        Text="Guardar"
                         BackgroundColor="#0595EC"
                         TextColor="#ffffff"
                         CornerRadius="10"
