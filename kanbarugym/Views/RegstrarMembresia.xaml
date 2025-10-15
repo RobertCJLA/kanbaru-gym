@@ -195,7 +195,7 @@ ColumnSpacing="10">
                   FontAttributes="Bold"
                   HorizontalOptions="Fill"
                   VerticalOptions="Center"
-                  Clicked="OnCreateCliente">
+                  >
 
                 <Button.Shadow>
                     <Shadow Brush="Black"
