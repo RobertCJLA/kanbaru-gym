@@ -137,7 +137,7 @@
 
             <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center" Margin="5,0">
                 <Grid>
-                    <Picker x:Name="cmbMonto"
+                    <Picker x:Name="cmbMembresia"
          Title="Selecciona una opción"
          FontSize="13"
          TextColor="Black"
