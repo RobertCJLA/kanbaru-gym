@@ -85,14 +85,14 @@ namespace kanbarugym.Pages
             // Construir objeto para API
             var entrenador = new
             {
-                Id = Guid.NewGuid().ToString(),
-                Nombres = txtNombreEntrenador.Text.Trim(),
-                FechaNacimiento = fechaNacimiento.ToString("yyyy-MM-dd"),
-                Sexo = sexo,
-                Experiencia = experiencia,
-                Especialidad = especialidad,
-                CorreoElectronico = txtCorreoEntrenador.Text.Trim(),
-                Telefono = txtTelefonoEntrenador.Text.Trim()
+                id = "",
+                nombres = txtNombreEntrenador.Text.Trim(),
+                fechaNacimiento = fechaNacimiento.ToString("yyyy-MM-dd"),
+                especialidad,
+                experiencia,
+                correoElectronico = txtCorreoEntrenador.Text.Trim(),
+                telefono = txtTelefonoEntrenador.Text.Trim(),
+                sexo,
             };
 
             var (ok, error) = await EntrenadoresLib.CrearEntrenador(entrenador);

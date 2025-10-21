@@ -4,9 +4,17 @@ namespace kanbarugym.Views;
 
 public partial class RegstrarMembresia : ContentPage
 {
-	public RegstrarMembresia()
+	private string id = string.Empty;
+	private string name = string.Empty;
+
+	public RegstrarMembresia(string id, string name)
 	{
 		InitializeComponent();
+		this.id = id;
+		this.name = name;
+
+		txtCliente.Text = this.name;
+		txtCliente.IsEnabled = false;
 	}
 
 	public async void OnCreateMembresia (object sender, EventArgs e)
@@ -26,7 +34,7 @@ public partial class RegstrarMembresia : ContentPage
 		}
 		if(!dateRegex.IsMatch(fechaInicio))
 		{
-			await DisplayAlert("Error", "Fecha de nacimiento inválida. Use el formato AAAA-MM-DD.", "OK")
+			await DisplayAlert("Error", "Fecha de nacimiento inválida. Use el formato AAAA-MM-DD.", "OK");
 				return;
 		}
 

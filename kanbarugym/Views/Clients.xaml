@@ -141,6 +141,7 @@
                                     ImageSource="settings.png"
                                     WidthRequest="30"
                                     HeightRequest="30"
+                                    CommandParameter="{Binding}"
                                     BackgroundColor="Transparent"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"/>

@@ -17,6 +17,13 @@ public partial class Clients : ContentPage
 
     private void OnMemberShipPage(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new RegstrarMembresia());
+        var button = sender as Button;
+        if(button?.CommandParameter is ClientesClass cliente)
+        {
+            string id = cliente.Id;
+            string nombre = cliente.Nombres;
+
+            Navigation.PushAsync(new RegstrarMembresia(id, nombre));
+        }
     }
 }
