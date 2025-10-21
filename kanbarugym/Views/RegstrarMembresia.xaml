@@ -196,6 +196,7 @@ ColumnSpacing="10">
                   FontAttributes="Bold"
                   HorizontalOptions="Fill"
                   VerticalOptions="Center"
+                    Clicked="OnCreateMembresia"
                   >
 
                 <Button.Shadow>

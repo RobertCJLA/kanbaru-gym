@@ -16,7 +16,7 @@ namespace kanbarugym.Lib
 
             HttpClient api = new APIService().ObtenerClientHttp();
 
-            var response = await api.PostAsync("pago", content);
+            var response = await api.PostAsync("pagos", content);
 
             return response.IsSuccessStatusCode;
         }
