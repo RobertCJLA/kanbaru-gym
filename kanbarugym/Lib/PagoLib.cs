@@ -9,7 +9,7 @@ namespace kanbarugym.Lib
 {
     public class PagoLib
     {
-        public static async Task<bool> CrearPago(object pago)
+        public static async Task<string> CrearPago(object pago)
         {
             var json = JsonConvert.SerializeObject(pago);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -17,10 +17,27 @@ namespace kanbarugym.Lib
             HttpClient api = new APIService().ObtenerClientHttp();
 
             var response = await api.PostAsync("pagos", content);
+            var responseBody = await response.Content.ReadAsStringAsync();
 
-            return response.IsSuccessStatusCode;
+            if (!response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var errorObj = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                    string message = errorObj?.message ?? "Error desconocido";
+
+                    return message;
+                }
+                catch
+                {
+                    return $"Error del servidor: {responseBody}";
+                }
+            }
+            else
+            {
+                var result = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                return result?.message ?? "Pago creado";
+            }
         }
-
-
     }
 }

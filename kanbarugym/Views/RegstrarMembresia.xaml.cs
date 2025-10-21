@@ -1,5 +1,7 @@
 using kanbarugym.Lib;
+using System.Data;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace kanbarugym.Views;
 
@@ -59,18 +61,31 @@ public partial class RegstrarMembresia : ContentPage
             return;
         }
 
-        
+        string fechaFin = CalcularProximaFecha(fechaInicio, membresia);
+
+        if(fechaFin == "Error")
+        {
+            await DisplayAlert("Error", "Error al calcular las fechas.", "OK");
+            return;
+        }
+
+        string administrador = new AdministradoresLib().ObtenerAdministrador();
+
         var nuevoPago = new
         {
+            idCliente = this.id,
             cliente,
             fechaInicio,
+            fechaFin,
+            membresia = membresia.ToLower(),
             monto = montoDecimal,
-            membresia
+            administrador
         };
 
        
-        bool response = await PagoLib.CrearPago(nuevoPago);
-        if (response)
+        string response = await PagoLib.CrearPago(nuevoPago);
+
+        if (response == "Pago creado")
         {
             await DisplayAlert("Éxito", "Membresía registrada correctamente.", "OK");
 
@@ -81,7 +96,29 @@ public partial class RegstrarMembresia : ContentPage
         }
         else
         {
-            await DisplayAlert("Error", "No se pudo registrar la membresía. Intente nuevamente.", "OK");
+            await DisplayAlert("Error", $"{response}.", "OK");
         }
+    }
+
+    private string CalcularProximaFecha(string fechaStr, string tipo)
+    {
+        DateTime fecha = DateTime.ParseExact(fechaStr, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        DateTime nuevaFecha;
+
+        switch (tipo.ToLower()) {
+            case "semanal":
+                nuevaFecha = fecha.AddDays(7);
+                break;
+            case "mensual":
+                nuevaFecha = fecha.AddMonths(1);
+                break;
+            case "anual":
+                nuevaFecha = fecha.AddYears(1);
+                break;
+            default:
+                return "Error";
+        }
+
+        return nuevaFecha.ToString("yyyy-MM-dd");
     }
 }

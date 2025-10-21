@@ -9,6 +9,7 @@ namespace kanbarugym.Lib
 {
     public class AdministradoresLib
     {
+        private string administrador = String.Empty;
         public async Task<string> Login(string usuario, string contrasena)
         {
             var user = new
@@ -44,6 +45,15 @@ namespace kanbarugym.Lib
                 var result = JsonConvert.DeserializeObject<dynamic>(responseBody);
                 return result?.message ?? "Login exitoso";
             }
+        }
+        public void ActualizarAdministrador(string administrador)
+        {
+            this.administrador = administrador;
+        }
+
+        public string ObtenerAdministrador()
+        {
+            return this.administrador;
         }
     }
 }

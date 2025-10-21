@@ -46,7 +46,7 @@
                            VerticalOptions="Center"
                            Margin="5,0"/>
 
-                        <Entry Placeholder="Correo electrónico"
+                        <Entry Placeholder="Usuario"
                                Grid.Column="1"
                                VerticalOptions="Center"
                            HorizontalOptions="Fill"

@@ -26,6 +26,8 @@ public partial class Login : ContentPage
             return;
         }
 
+        new AdministradoresLib().ActualizarAdministrador(email);
+
         var app = Application.Current;
         if (app != null && app.Windows.Count > 0 && app.Windows[0] != null)
         {
