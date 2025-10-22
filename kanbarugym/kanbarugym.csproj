@@ -91,9 +91,6 @@
 	  <MauiXaml Update="Views\Clients.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Membership.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\RegstrarMembresia.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
