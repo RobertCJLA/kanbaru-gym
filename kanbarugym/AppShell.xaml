@@ -12,7 +12,6 @@
     <TabBar>
 
         <Tab Title="Inicio" Icon="home.png">
-
             <ShellContent ContentTemplate="{DataTemplate views:PanelAdministrativo}" Route="PanelAdministrativo"/>
         </Tab>
 
@@ -22,10 +21,6 @@
 
         <Tab Title="Entrenador" Icon="trainer.png">
             <ShellContent ContentTemplate="{DataTemplate views:Trainer}" Route="Trainer" />
-        </Tab>
-
-        <Tab Title="Membresías" Icon="clipboard.png">
-            <ShellContent ContentTemplate="{DataTemplate views:Membership}" Route="Membership" />
         </Tab>
 
     </TabBar>
