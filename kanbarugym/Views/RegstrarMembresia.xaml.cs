@@ -82,8 +82,6 @@ public partial class RegstrarMembresia : ContentPage
             administrador
         };
 
-        await DisplayAlert("Datos", $"{this.id}, {this.name}, {fechaInicio}, {fechaFin}, {membresia.ToLower()}, {montoDecimal}, {administrador}", "OK");
-       
         string response = await PagoLib.CrearPago(nuevoPago);
 
         if (response == "Pago creado")
