@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:kanbarugym.ViewModels"
+             xmlns:pages="clr-namespace:kanbarugym.Pages"
              x:Class="kanbarugym.Pages.RegistrarEntrenador"
-             x:DataType="vm:TrainersViewModel"
+             x:DataType="pages:RegistrarEntrenador"
              Title="Registrar nuevo entrenador"
              BackgroundColor="White"
              Padding="15,0">

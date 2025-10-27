@@ -11,16 +11,22 @@
 
     <TabBar>
 
-        <Tab Title="Inicio" Icon="home.png">
-            <ShellContent ContentTemplate="{DataTemplate views:PanelAdministrativo}" Route="PanelAdministrativo"/>
+        <Tab Title="Inicio" Icon="home.png" Route="homeTab">
+            <ShellContent Title="Inicio"
+                Route="PanelAdministrativo"
+                ContentTemplate="{DataTemplate views:PanelAdministrativo}" />
         </Tab>
 
-        <Tab Title="Clientes" Icon="client.png">
-            <ShellContent ContentTemplate="{DataTemplate views:Clients}" Route="Clients" />
+        <Tab Title="Clientes" Icon="client.png" Route="clientsTab">
+            <ShellContent Title="Clientes"
+                Route="Clients"
+                ContentTemplate="{DataTemplate views:Clients}" />
         </Tab>
 
-        <Tab Title="Entrenador" Icon="trainer.png">
-            <ShellContent ContentTemplate="{DataTemplate views:Trainer}" Route="Trainer" />
+        <Tab Title="Entrenador" Icon="trainer.png" Route="trainerTab">
+            <ShellContent Title="Entrenador"
+                Route="Trainer"
+                ContentTemplate="{DataTemplate views:Trainer}" />
         </Tab>
 
     </TabBar>

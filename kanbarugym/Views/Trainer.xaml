@@ -4,7 +4,7 @@
              xmlns:conv="clr-namespace:kanbarugym.Converters"
              xmlns:viewmodels="clr-namespace:kanbarugym.ViewModels"
              x:Class="kanbarugym.Views.Trainer"
-             x:Name="ThisPage"
+             x:Name="TrainerPage"
              Title="Lista de entrenadores"
              BackgroundColor="White">
 
@@ -135,16 +135,55 @@
                                 </Label.GestureRecognizers>
                             </Label>
 
-                            <Button Grid.Column="2"
-                                    Padding="5"
-                                    ImageSource="settings.png"
-                                    WidthRequest="30"
-                                    HeightRequest="30"
-                                    CommandParameter="{Binding}"
-                                    BackgroundColor="Transparent"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"/>
+                            <!-- Engranaje -->
+                            <ImageButton x:Name="GearBtn"
+                                         Grid.Column="2"
+                                         Source="settings.png"
+                                         WidthRequest="26"
+                                         HeightRequest="26"
+                                         BackgroundColor="Transparent"
+                                         Clicked="OnGearClicked" />
                         </Grid>
+
+                        <!-- Menú desplegable anclado al engranaje -->
+                        <Border IsVisible="{Binding IsMenuVisible}"
+                               HorizontalOptions="End"
+                               BackgroundColor="#0595EC"
+                               Stroke="#80FFFFFF"
+                               StrokeThickness="1"
+                               Padding="10"
+                               Margin="0,6,0,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10"/>
+                            </Border.StrokeShape>
+                            <Border.Shadow>
+                                <Shadow Brush="Black" Opacity="0.25" Offset="0,2" Radius="6"/>
+                            </Border.Shadow>
+                            <VerticalStackLayout Spacing="10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnEditTrainer" />
+                                    </Grid.GestureRecognizers>
+                                    <Image Source="edit.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                                    <Label Grid.Column="1" Text="Editar" VerticalOptions="Center" TextColor="White" FontSize="18"/>
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnDeleteTrainer" />
+                                    </Grid.GestureRecognizers>
+                                    <Image Source="delete_person.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center"/>
+                                    <Label Grid.Column="1" Text="Eliminar" VerticalOptions="Center" TextColor="White" FontSize="18"/>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Border>
 
                         <Border Margin="5,0" IsVisible="{Binding IsExpanded}">
                             <Border.StrokeShape>
@@ -164,5 +203,18 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <!-- Overlay de carga vistoso -->
+        <Grid x:Name="LoadingOverlay" Grid.RowSpan="2" IsVisible="{Binding IsBusy}" BackgroundColor="#20000000">
+            <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                <Border x:Name="LoadingCard" BackgroundColor="#CCFFFFFF" StrokeThickness="0" Padding="20"
+                       Shadow="10,10,0.3,Black" >
+                    <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+                        <ActivityIndicator x:Name="SpinnerAI" IsRunning="{Binding IsBusy}" Color="#0595EC" WidthRequest="48" HeightRequest="48"/>
+                        <Label Text="Cargando..." TextColor="#0595EC" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </Grid>
     </Grid>
 </ContentPage>

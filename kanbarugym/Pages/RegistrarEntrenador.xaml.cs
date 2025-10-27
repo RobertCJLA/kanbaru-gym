@@ -3,12 +3,17 @@ using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using Microsoft.Maui.Controls;
 using kanbarugym.Lib;
+using kanbarugym.Clases;
+using System.Globalization;
 
 namespace kanbarugym.Pages
 {
     public partial class RegistrarEntrenador : ContentPage
     {
         public ObservableCollection<string> Especialidades { get; set; }
+
+        private bool _isEdit;
+        private EntrenadorClass? _original;
 
         public RegistrarEntrenador()
         {
@@ -27,6 +32,28 @@ namespace kanbarugym.Pages
             BindingContext = this;
         }
 
+        public RegistrarEntrenador(EntrenadorClass entrenador) : this()
+        {
+            _isEdit = true;
+            _original = entrenador;
+            Title = "Editar entrenador";
+
+            // Prefill campos manteniendo el formato yyyy-MM-dd
+            txtNombreEntrenador.Text = entrenador.Nombres;
+            if (DateTime.TryParseExact(entrenador.FechaNacimiento, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt))
+                txtFechaNacimientoEntrenador.Text = dt.ToString("yyyy-MM-dd");
+            else if (DateTime.TryParse(entrenador.FechaNacimiento, out var dt2))
+                txtFechaNacimientoEntrenador.Text = dt2.ToString("yyyy-MM-dd");
+            else
+                txtFechaNacimientoEntrenador.Text = entrenador.FechaNacimiento;
+
+            cmbSexoEntrenador.SelectedItem = entrenador.Sexo;
+            txtExperiencia.Text = entrenador.Experiencia.ToString();
+            cmbEspecialidad.SelectedItem = entrenador.Especialidad;
+            txtCorreoEntrenador.Text = entrenador.CorreoElectronico;
+            txtTelefonoEntrenador.Text = entrenador.Telefono;
+        }
+
         private async void OnCreateEntrenador(object sender, EventArgs e)
         {
             // Validar nombre
@@ -36,11 +63,11 @@ namespace kanbarugym.Pages
                 return;
             }
 
-            // Validar fecha de nacimiento (formato YYYY-MM-DD)
+            // Validar fecha de nacimiento (formato yyyy-MM-dd)
             if (string.IsNullOrWhiteSpace(txtFechaNacimientoEntrenador.Text) ||
-                !DateTime.TryParse(txtFechaNacimientoEntrenador.Text, out DateTime fechaNacimiento))
+                !DateTime.TryParseExact(txtFechaNacimientoEntrenador.Text, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaNacimiento))
             {
-                await DisplayAlert("Error", "Ingresa una fecha válida en formato YYYY-MM-DD.", "OK");
+                await DisplayAlert("Error", "Ingresa una fecha válida en formato yyyy-MM-dd.", "OK");
                 return;
             }
 
@@ -82,7 +109,34 @@ namespace kanbarugym.Pages
                 return;
             }
 
-            // Construir objeto para API
+            if (_isEdit && _original is not null)
+            {
+                // Actualizar (enviar la fecha en yyyy-MM-dd)
+                var updateBody = new
+                {
+                    id = _original.Id,
+                    nombres = txtNombreEntrenador.Text.Trim(),
+                    fechaNacimiento = fechaNacimiento.ToString("yyyy-MM-dd"),
+                    especialidad,
+                    experiencia,
+                    correoElectronico = txtCorreoEntrenador.Text.Trim(),
+                    telefono = txtTelefonoEntrenador.Text.Trim(),
+                    sexo,
+                };
+
+                var (ok, error) = await EntrenadoresLib.ActualizarEntrenador(_original.Id, updateBody);
+                if (!ok)
+                {
+                    await DisplayAlert("Error", $"No se pudo actualizar el entrenador. Detalle: {error}", "OK");
+                    return;
+                }
+
+                await DisplayAlert("Éxito", "Entrenador actualizado correctamente.", "OK");
+                await Navigation.PopAsync();
+                return;
+            }
+
+            // Crear nuevo (enviar la fecha en yyyy-MM-dd)
             var entrenador = new
             {
                 id = "",
@@ -95,10 +149,10 @@ namespace kanbarugym.Pages
                 sexo,
             };
 
-            var (ok, error) = await EntrenadoresLib.CrearEntrenador(entrenador);
-            if (!ok)
+            var (okCreate, errorCreate) = await EntrenadoresLib.CrearEntrenador(entrenador);
+            if (!okCreate)
             {
-                await DisplayAlert("Error", $"No se pudo guardar el entrenador. Detalle: {error}", "OK");
+                await DisplayAlert("Error", $"No se pudo guardar el entrenador. Detalle: {errorCreate}", "OK");
                 return;
             }
 

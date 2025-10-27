@@ -26,6 +26,18 @@ public class EntrenadorClass : INotifyPropertyChanged
         }
     }
 
+    private bool _isMenuVisible;
+    public bool IsMenuVisible
+    {
+        get => _isMenuVisible;
+        set
+        {
+            if (_isMenuVisible == value) return;
+            _isMenuVisible = value;
+            OnPropertyChanged();
+        }
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
     protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
