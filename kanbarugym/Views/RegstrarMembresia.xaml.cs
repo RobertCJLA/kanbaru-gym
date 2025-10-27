@@ -27,10 +27,10 @@ public partial class RegstrarMembresia : ContentPage
         string monto = txtMonto.Text;
         string? membresia = cmbMembresia.SelectedItem?.ToString();
 
-        
+
         Regex dateRegex = new(@"^[0-9]{4}-[0-9]{2}-[0-9]{2}$");
 
-        
+
         if (string.IsNullOrWhiteSpace(cliente) ||
             string.IsNullOrWhiteSpace(fechaInicio) ||
             string.IsNullOrWhiteSpace(monto) ||
@@ -40,21 +40,21 @@ public partial class RegstrarMembresia : ContentPage
             return;
         }
 
-       
+
         if (!dateRegex.IsMatch(fechaInicio))
         {
             await DisplayAlert("Error", "Fecha inválida. Use el formato AAAA-MM-DD.", "OK");
             return;
         }
 
-        
+
         if (!decimal.TryParse(monto, out decimal montoDecimal) || montoDecimal <= 0)
         {
             await DisplayAlert("Error", "Monto inválido. Ingrese un número mayor a 0.", "OK");
             return;
         }
 
-        
+
         if (cliente.Length < 3)
         {
             await DisplayAlert("Error", "El nombre del cliente es demasiado corto.", "OK");
@@ -63,7 +63,7 @@ public partial class RegstrarMembresia : ContentPage
 
         string fechaFin = CalcularProximaFecha(fechaInicio, membresia);
 
-        if(fechaFin == "Error")
+        if (fechaFin == "Error")
         {
             await DisplayAlert("Error", "Error al calcular las fechas.", "OK");
             return;
@@ -74,7 +74,7 @@ public partial class RegstrarMembresia : ContentPage
         var nuevoPago = new
         {
             idCliente = this.id,
-            cliente,
+            cliente = this.name,
             fechaInicio,
             fechaFin,
             membresia = membresia.ToLower(),
@@ -82,6 +82,7 @@ public partial class RegstrarMembresia : ContentPage
             administrador
         };
 
+        await DisplayAlert("Datos", $"{this.id}, {this.name}, {fechaInicio}, {fechaFin}, {membresia.ToLower()}, {montoDecimal}, {administrador}", "OK");
        
         string response = await PagoLib.CrearPago(nuevoPago);
 

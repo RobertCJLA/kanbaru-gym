@@ -106,6 +106,7 @@
                     CornerRadius="10"
                     HeightRequest="45"
                     FontAttributes="Bold"
+                    x:Name="btnLogin"
                     Clicked="OnSendLogin">
                     <Button.Shadow>
                         <Shadow Brush="Black"

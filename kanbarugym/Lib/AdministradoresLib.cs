@@ -9,7 +9,7 @@ namespace kanbarugym.Lib
 {
     public class AdministradoresLib
     {
-        private string administrador = String.Empty;
+        private static string administrador = String.Empty;
         public async Task<string> Login(string usuario, string contrasena)
         {
             var user = new
@@ -46,14 +46,14 @@ namespace kanbarugym.Lib
                 return result?.message ?? "Login exitoso";
             }
         }
-        public void ActualizarAdministrador(string administrador)
+        public void ActualizarAdministrador(string admin)
         {
-            this.administrador = administrador;
+            administrador = admin;
         }
 
         public string ObtenerAdministrador()
         {
-            return this.administrador;
+            return administrador;
         }
     }
 }

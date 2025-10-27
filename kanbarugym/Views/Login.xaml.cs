@@ -13,15 +13,26 @@ public partial class Login : ContentPage
 
     private async void OnSendLogin(object sender, EventArgs e)
     {
+        Button btnLogi = btnLogin;
+
+        btnLogi.Text = "Buscando";
+        btnLogi.IsEnabled = false;
+
         string email = txtEmail.Text;
         string password = txtPassword.Text;
 
-        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) return;
+        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        {
+            btnLogi.Text = "Comenzar";
+            btnLogi.IsEnabled = true;
+        }
 
         string response = await new AdministradoresLib().Login(email, password);
 
         if(response != "Login exitoso")
         {
+            btnLogi.Text = "Comenzar";
+            btnLogi.IsEnabled = true;
             await DisplayAlert("Error", $"{response}.", "OK");
             return;
         }
