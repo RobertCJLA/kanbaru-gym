@@ -20,6 +20,19 @@ public partial class RegstrarMembresia : ContentPage
         txtCliente.IsEnabled = false;
     }
 
+
+    public void OnLastPage(object sender, EventArgs e)
+    {
+        var app = Application.Current;
+        if (app != null && app.Windows.Count > 0 && app.Windows[0] != null)
+        {
+
+            app.Windows[0].Page = new AppShell();
+
+            Shell.Current.GoToAsync("//PanelAdministrativo");
+        }
+    }
+
     public async void OnCreateMembresia(object sender, EventArgs e)
     {
         string cliente = txtCliente.Text;
@@ -88,10 +101,14 @@ public partial class RegstrarMembresia : ContentPage
         {
             await DisplayAlert("Éxito", "Membresía registrada correctamente.", "OK");
 
-            txtCliente.Text = this.name;
-            txtFechaInicio.Text = string.Empty;
-            txtMonto.Text = string.Empty;
-            cmbMembresia.SelectedItem = null;
+            var app = Application.Current;
+            if (app != null && app.Windows.Count > 0 && app.Windows[0] != null)
+            {
+
+                app.Windows[0].Page = new AppShell();
+
+                await Shell.Current.GoToAsync("//PanelAdministrativo");
+            }
         }
         else
         {

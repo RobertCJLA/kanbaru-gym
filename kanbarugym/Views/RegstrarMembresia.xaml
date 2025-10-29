@@ -178,6 +178,7 @@ ColumnSpacing="10">
       HeightRequest="45"
       FontAttributes="Bold"
       HorizontalOptions="Fill"
+      Clicked="OnLastPage"
       VerticalOptions="Center">
                 <Button.Shadow>
                     <Shadow Brush="Black"

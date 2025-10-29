@@ -1,6 +1,9 @@
+using kanbarugym.Clases;
 using kanbarugym.Lib;
+using kanbarugym.Views;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace kanbarugym.Pages;
 
@@ -70,16 +73,16 @@ public partial class RegistrarCliente : ContentPage
             sexo
         };
 
-        bool response = await ClientesLib.CrearCliente(nuevoCliente);
+        ClienteResponse response = await ClientesLib.CrearCliente(nuevoCliente);
 
-        if (response)
+        if (response.message == "Cliente creado")
         {
             await DisplayAlert("Éxito", "Cliente creado exitosamente.", "OK");
-            txtNombreCliente.Text = string.Empty;
-            txtFechaNacimiento.Text = string.Empty;
-            txtNECliente.Text = string.Empty;
-            txtNTClient.Text = string.Empty;
-            cmbSexo.SelectedItem = null;
+
+            if(response.id != null)
+            {
+                await Navigation.PushAsync(new RegstrarMembresia(response.id, nombres));
+            }
         }
         else
         {
