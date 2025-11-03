@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using kanbarugym.Clases;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +40,21 @@ namespace kanbarugym.Lib
                 var result = JsonConvert.DeserializeObject<dynamic>(responseBody);
                 return result?.message ?? "Pago creado";
             }
+        }
+        public static async Task<List<PagoClass>> ObtenerPagosClientes(string id)
+        {
+            HttpClient api = new APIService().ObtenerClientHttp();
+            var response = await api.GetAsync($"pagos/cliente/{id}");
+
+            if (!response.IsSuccessStatusCode) return [];
+
+            var json = await response.Content.ReadAsStringAsync();
+            var data = JObject.Parse(json);
+
+            var pagosToken = data["pagos"];
+            var pagos = pagosToken?.ToObject<List<PagoClass>>();
+
+            return pagos ?? [];
         }
     }
 }

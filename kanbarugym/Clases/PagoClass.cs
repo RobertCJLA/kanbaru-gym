@@ -7,16 +7,19 @@ using System.Threading.Tasks;
 
 namespace kanbarugym.Clases
 {
- 
-public class PagoClass : INotifyPropertyChanged
+
+    public class PagoClass : INotifyPropertyChanged
     {
+        public required string Id { get; set; }
+        public required string IdCliente { get; set; }
         public required string Cliente { get; set; }
-
         public required string FechaInicio { get; set; }
-
-        public required string Monto { get; set; }
-
+        public required string FechaFin { get; set; }
         public required string Membresia { get; set; }
+        public required string Monto { get; set; }
+        public required string Administrador { get; set; }
+        public required bool Activo { get; set; }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
     }
