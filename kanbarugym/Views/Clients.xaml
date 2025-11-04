@@ -52,8 +52,7 @@
             <Border Grid.ColumnSpan="3"
                     Stroke="#72C9F4"
                     StrokeThickness="1"
-                    BackgroundColor="White"
-                    Padding="0">
+                    BackgroundColor="White">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
@@ -74,7 +73,6 @@
                    Placeholder="Buscar por nombre o apellidos"
                    BackgroundColor="Transparent"
                    VerticalOptions="Center"
-                   Margin="0"
                    TextColor="Black"
                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceEventName=TextChanged}"/>
 
@@ -95,7 +93,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <VerticalStackLayout Padding="0,5">
-                        
+
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
@@ -126,7 +124,6 @@
                                    Grid.Column="1"
                                    Margin="5,0"
                                    FontSize="16"
-                                   LineBreakMode="TailTruncation"
                                    VerticalOptions="Center">
                                 <Label.GestureRecognizers>
                                     <TapGestureRecognizer
@@ -135,7 +132,8 @@
                                 </Label.GestureRecognizers>
                             </Label>
 
-                            <Button Grid.Column="2"
+                            <Button x:Name="SettingsButton"
+                                    Grid.Column="2"
                                     Padding="5"
                                     Clicked="OnMemberShipPage"
                                     ImageSource="settings.png"
@@ -161,9 +159,38 @@
                             </VerticalStackLayout>
                         </Border>
 
+
+
                     </VerticalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <Grid x:Name="LoadingOverlay"
+              Grid.RowSpan="2"
+              IsVisible="{Binding IsBusy}"
+              BackgroundColor="Transparent"
+              InputTransparent="False">
+            <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                <Border BackgroundColor="#CCFFFFFF"
+                        StrokeThickness="0"
+                        Padding="20"
+                        StrokeShape="RoundRectangle 20">
+                    <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
+                        <ActivityIndicator
+                            IsRunning="{Binding IsBusy}"
+                            Color="#0595EC"
+                            WidthRequest="48"
+                            HeightRequest="48"/>
+                        <Label Text="Cargando..."
+                               TextColor="#0595EC"
+                               FontAttributes="Bold"
+                               FontSize="16"
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </Grid>
+
     </Grid>
 </ContentPage>

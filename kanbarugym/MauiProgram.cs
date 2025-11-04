@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Handlers;
+using CommunityToolkit.Maui;
 
 #if ANDROID
 using Android.Graphics.Drawables;
@@ -15,6 +16,7 @@ namespace kanbarugym
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

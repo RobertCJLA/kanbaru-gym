@@ -21,7 +21,7 @@
                     BackgroundColor="#0595EC"
                     StrokeShape="RoundRectangle 100,100"
                     HeightRequest="5"
-                    WidthRequest="310"
+                    WidthRequest="252"
                     HorizontalOptions="Center" />
 
             </VerticalStackLayout>

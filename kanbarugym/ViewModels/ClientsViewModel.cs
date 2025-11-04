@@ -1,15 +1,29 @@
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using kanbarugym.Clases;
 using kanbarugym.Lib;
 
 namespace kanbarugym.ViewModels;
 
-public class ClientsViewModel
+public partial class ClientsViewModel : INotifyPropertyChanged
 {
     public ObservableCollection<ClientesClass> Clientes { get; } = new();
 
     private List<ClientesClass> _allClientes = new();
+
+    private bool _isBusy;
+    public bool IsBusy
+    {
+        get => _isBusy;
+        set
+        {
+            if (_isBusy == value) return;
+            _isBusy = value;
+            OnPropertyChanged();
+        }
+    }
 
     public ClientsViewModel()
     {
@@ -18,10 +32,17 @@ public class ClientsViewModel
 
     public async Task CargarClientes()
     {
-        var clientes = await ClientesLib.ObtenerClientes();
-        if (clientes is null) return;
-        _allClientes = clientes;
-        ApplyFilter();
+        try
+        {
+            IsBusy = true;
+            var clientes = await ClientesLib.ObtenerClientes();
+            _allClientes = clientes ?? [];
+            ApplyFilter();
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     private string? _searchText;
@@ -46,12 +67,10 @@ public class ClientsViewModel
             filtered = _allClientes.Where(c =>
             {
                 var nombre = c.Nombres ?? string.Empty;
-                // Debe contener todos los tokens (nombre o apellidos) en cualquier orden
                 return tokens.All(t => nombre.Contains(t, StringComparison.OrdinalIgnoreCase));
             });
         }
 
-        // Colapsar todas las cards al aplicar filtro para evitar estados inconsistentes
         foreach (var it in _allClientes)
             it.IsExpanded = false;
 
@@ -69,4 +88,10 @@ public class ClientsViewModel
             it.IsExpanded = false;
         cliente.IsExpanded = willExpand;
     });
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+    protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+
 }
