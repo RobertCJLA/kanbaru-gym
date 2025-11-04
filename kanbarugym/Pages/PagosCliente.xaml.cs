@@ -7,10 +7,11 @@ public partial class PagosCliente : ContentPage
 {
     private List<PagoClass> pagos = [];
 
-    public PagosCliente(string id)
+    public PagosCliente(string id, string nombre)
     {
 
         InitializeComponent();
+        Title = $"Pagos de {nombre}";
         CargarPagos(id);
     }
 

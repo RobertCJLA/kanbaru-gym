@@ -24,7 +24,7 @@ public partial class Clients : ContentPage
             string nombre = cliente.Nombres;
 
             //Navigation.PushAsync(new RegstrarMembresia(id, nombre));
-            Navigation.PushAsync(new PagosCliente(id));
+            Navigation.PushAsync(new PagosCliente(id, nombre));
         }
     }
 }

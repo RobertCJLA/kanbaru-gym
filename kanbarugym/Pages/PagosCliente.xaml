@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kanbarugym.Pages.PagosCliente"
-             Title="PagosCliente">
+             Title="Pagos del cliente">
     <ScrollView>
         <CollectionView x:Name="PagosCollection"
                         Margin="15"
@@ -20,24 +20,21 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <!-- Tipo de membresía -->
                             <Label Text="{Binding Membresia}"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    TextColor="White" />
 
-                            <!-- Nombre del cliente -->
                             <Label Text="{Binding Cliente}"
                                    Grid.Row="1"
                                    FontSize="14"
                                    TextColor="White"
                                    LineBreakMode="TailTruncation" />
 
-                            <!-- Fecha de vencimiento + botón de editar -->
                             <Grid Grid.Row="2"
                                   ColumnDefinitions="Auto,*,Auto"
                                   VerticalOptions="Center">
-                                <Label Text="Vence"
+                                <Label Text="Vence "
                                        TextColor="White"
                                        FontSize="12"
                                        VerticalOptions="Center" />
@@ -46,7 +43,7 @@
                                        FontSize="12"
                                        VerticalOptions="Center"
                                        Grid.Column="1" />
-                                <ImageButton Source="edit_icon.png"
+                                <ImageButton Source="delete_person.png"
                                              HeightRequest="18"
                                              WidthRequest="18"
                                              BackgroundColor="Transparent"
