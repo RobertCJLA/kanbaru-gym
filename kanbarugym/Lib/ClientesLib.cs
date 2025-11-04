@@ -32,7 +32,7 @@ namespace kanbarugym.Lib
                 }
                 catch
                 {
-                    return new ClienteResponse { message = $"Error del servidor: {responseBody}", id = null};
+                    return new ClienteResponse { message = $"Error del servidor {responseBody}", id = null};
                 }
             }
             else

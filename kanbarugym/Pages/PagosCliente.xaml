@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kanbarugym.Pages.PagosCliente"
+             Title="Pagos del cliente">
+    <ScrollView>
+        <CollectionView x:Name="PagosCollection"
+                        Margin="15"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="#0099FF"
+                           Padding="15"
+                           Shadow="True"
+                           Margin="0,10,0,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Label Text="{Binding Membresia}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="White" />
+
+                            <Label Text="{Binding Cliente}"
+                                   Grid.Row="1"
+                                   FontSize="14"
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation" />
+
+                            <Grid Grid.Row="2"
+                                  ColumnDefinitions="Auto,*,Auto"
+                                  VerticalOptions="Center">
+                                <Label Text="Vence "
+                                       TextColor="White"
+                                       FontSize="12"
+                                       VerticalOptions="Center" />
+                                <Label Text="{Binding FechaFin}"
+                                       TextColor="White"
+                                       FontSize="12"
+                                       VerticalOptions="Center"
+                                       Grid.Column="1" />
+                                <ImageButton Source="delete_person.png"
+                                             HeightRequest="18"
+                                             WidthRequest="18"
+                                             BackgroundColor="Transparent"
+                                             HorizontalOptions="End"
+                                             Grid.Column="2"
+                                             Clicked="EliminarPago"
+                                             CommandParameter="{Binding Id}" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>

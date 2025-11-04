@@ -86,7 +86,7 @@ public partial class RegistrarCliente : ContentPage
         }
         else
         {
-            await DisplayAlert("Error", "Error al crear el cliente. Intente nuevamente.", "OK");
+            await DisplayAlert("Error", $"{response.message}", "OK");
         }
     }
 

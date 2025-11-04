@@ -27,29 +27,38 @@ public partial class Clients : ContentPage
 
     }
 
-    // Asegúrate de que este método esté en la clase parcial 'Clients'
+    // Asegï¿½rate de que este mï¿½todo estï¿½ en la clase parcial 'Clients'
     private void OnRealizarPago(object sender, EventArgs e)
     {
-        // Lógica para realizar el pago aquí
+        // Lï¿½gica para realizar el pago aquï¿½
     }
 
     private void OnVerMembresias(object sender, EventArgs e)
     {
-        // Lógica para manejar el evento "Ver membresías"
-        // Puedes dejarlo vacío o implementar la navegación deseada
+        // Lï¿½gica para manejar el evento "Ver membresï¿½as"
+        // Puedes dejarlo vacï¿½o o implementar la navegaciï¿½n deseada
     }
 
-    // Agrega este método en la clase 'Clients' (code-behind de Clients.xaml)
+    // Agrega este mï¿½todo en la clase 'Clients' (code-behind de Clients.xaml)
     private void OnActualizar(object sender, EventArgs e)
     {
-        // Lógica para actualizar el cliente
+        // Lï¿½gica para actualizar el cliente
         // Puedes obtener el cliente seleccionado usando el CommandParameter si es necesario
     }
 
-    // Asegúrate de que este método esté en la clase parcial 'Clients'
+    // Asegï¿½rate de que este mï¿½todo estï¿½ en la clase parcial 'Clients'
     private void OnEliminar(object sender, EventArgs e)
     {
-        // Aquí puedes agregar la lógica para eliminar el cliente seleccionado.
+        // Aquï¿½ puedes agregar la lï¿½gica para eliminar el cliente seleccionado.
         // Por ejemplo, puedes obtener el cliente desde el CommandParameter si es necesario.
+        var button = sender as Button;
+        if(button?.CommandParameter is ClientesClass cliente)
+        {
+            string id = cliente.Id;
+            string nombre = cliente.Nombres;
+
+            //Navigation.PushAsync(new RegstrarMembresia(id, nombre));
+            Navigation.PushAsync(new PagosCliente(id, nombre));
+        }
     }
 }
