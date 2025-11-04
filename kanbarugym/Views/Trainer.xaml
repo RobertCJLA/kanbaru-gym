@@ -83,7 +83,7 @@
  </Label.GestureRecognizers>
  </Label>
 
- <ImageButton x:Name="GearBtn" Grid.Column="2" Grid.ZIndex="200" Source="settings.png" WidthRequest="26" HeightRequest="26" BackgroundColor="Transparent" Clicked="OnGearClicked" />
+ <ImageButton x:Name="GearBtn" Grid.Column="2"  Source="settings.png" WidthRequest="26" HeightRequest="26" BackgroundColor="Transparent" Clicked="OnGearClicked" />
  </Grid>
 
  <!-- Details -->
@@ -100,7 +100,7 @@
  </Border>
 
  <!-- Overlay menu to the left of gear, show shadow only when IsMenuVisible && IsExpanded -->
- <Border Grid.Row="0" Grid.RowSpan="2" x:Name="MenuBorder" AutomationId="MenuBorder" Grid.ZIndex="100" HorizontalOptions="End" VerticalOptions="Start" Margin="0,36,46,0" BackgroundColor="#0595EC" Stroke="#80FFFFFF" StrokeThickness="1" Padding="10" IsVisible="{Binding IsMenuVisible}">
+ <Border Grid.Row="0" Grid.RowSpan="2" x:Name="MenuBorder" AutomationId="MenuBorder" HorizontalOptions="End" VerticalOptions="Start" Margin="0,36,46,0" BackgroundColor="#0595EC" Stroke="#80FFFFFF" StrokeThickness="1" Padding="10" IsVisible="{Binding IsMenuVisible}">
  <Border.StrokeShape>
  <RoundRectangle CornerRadius="10"/>
  </Border.StrokeShape>
@@ -138,9 +138,9 @@
  </CollectionView>
 
  <!-- Loading overlay -->
- <Grid x:Name="LoadingOverlay" Grid.RowSpan="2" IsVisible="{Binding IsBusy}" BackgroundColor="#20000000">
+ <Grid x:Name="LoadingOverlay" Grid.RowSpan="2" IsVisible="{Binding IsBusy}" BackgroundColor="Transparent">
  <Grid VerticalOptions="Center" HorizontalOptions="Center">
- <Border x:Name="LoadingCard" BackgroundColor="#CCFFFFFF" StrokeThickness="0" Padding="20" Shadow="10,10,0.3,Black">
+ <Border x:Name="LoadingCard" BackgroundColor="#CCFFFFFF" StrokeThickness="0" Padding="20" Shadow="10,10,0.3,Transparent">
  <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
  <ActivityIndicator x:Name="SpinnerAI" IsRunning="{Binding IsBusy}" Color="#0595EC" WidthRequest="48" HeightRequest="48"/>
  <Label Text="Cargando..." TextColor="#0595EC" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center"/>
