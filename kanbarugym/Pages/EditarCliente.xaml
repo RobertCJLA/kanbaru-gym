@@ -2,11 +2,237 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kanbarugym.Pages.EditarCliente"
-             Title="EditarCliente">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="EditarCliente"
+             Padding="20,0"
+             >
+    
+    
+
+    <Shell.TitleView>
+        <Grid BackgroundColor="White">
+            <VerticalStackLayout Margin="0,10,0,0">
+                <Label Text="Editar cliente" 
+                FontSize="22"
+                FontAttributes="Bold" 
+                Padding="60,0,0,0"
+                TextColor="Black"/>
+
+                <Border StrokeThickness="0"
+                     Margin="0,0,61,0"
+                BackgroundColor="#0595EC"
+                StrokeShape="RoundRectangle 100,100"
+                HeightRequest="5"
+                WidthRequest="235"
+                HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.TitleView>
+
+    <ScrollView>
+
+        <VerticalStackLayout Margin="0,10,0,0">
+            <Label Text="Nombres y Apellido"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5"/>
+                </Border.Shadow>
+                <Entry Placeholder="Ingrese un nombre"
+                       HorizontalOptions="Fill"
+                       Margin="10,0"
+                       x:Name="txtNombreCliente"
+                       Keyboard="Text"
+                       MaxLength="50"
+                       TextColor="Black"
+                       FontSize="13"
+                       ClearButtonVisibility="WhileEditing"/>
+            </Border>
+
+            <Label Text="Fecha de Nacimiento"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff">
+
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5"/>
+                </Border.Shadow>
+                <Entry Placeholder="YYYY-MM-DD"
+                       HorizontalOptions="Fill"
+                       Margin="10,0,10,0"
+                       x:Name="txtFechaNacimiento"
+                       Keyboard="Text"
+                       MaxLength="50"
+                       TextColor="Black"
+                       FontSize="13"
+                       ClearButtonVisibility="WhileEditing"/>
+            </Border>
+
+            <Label Text="Sexo"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="5,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5"/>
+                </Border.Shadow>
+
+                <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center" Margin="5,0">
+                    <Grid>
+                        <Picker x:Name="cmbSexo"
+         Title="Selecciona una opción"
+         FontSize="13"
+         TextColor="Black"
+         TitleColor="Gray"
+         BackgroundColor="Transparent"
+         HorizontalOptions="Fill"
+         Margin="0">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>Masculino</x:String>
+                                    <x:String>Femenino</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+
+                    </Grid>
+
+                    <Image Source="clipborad2.png"
+Grid.Column="1"
+HeightRequest="40"
+VerticalOptions="Center"
+HorizontalOptions="End"
+Margin="5,0,5,0"/>
+                </Grid>
+            </Border>
+            <Label Text="Correo lectrónico"
+       FontSize="16"
+       FontAttributes="Bold"
+       TextColor="Black"
+       HorizontalOptions="Start"
+       Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+        StrokeShape="RoundRectangle 10"
+        StrokeThickness="1"
+        BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                Opacity="0.1"
+                Offset="0,0"
+                Radius="5"/>
+                </Border.Shadow>
+                <Entry Placeholder="ejemplo@ejemplo.com"
+           HorizontalOptions="Fill"
+                       Margin="10,0"
+           x:Name="txtNECliente"
+           Keyboard="Email"
+           MaxLength="50"
+           TextColor="Black"
+           FontSize="13"
+           ClearButtonVisibility="WhileEditing"/>
+            </Border>
+            <Label Text="Número de teléfono"
+       FontSize="16"
+       FontAttributes="Bold"
+       TextColor="Black"
+       HorizontalOptions="Start"
+       Margin="0,10,0,5"/>
+
+            <Border Stroke="#72C9F4"
+        StrokeShape="RoundRectangle 10"
+        StrokeThickness="1"
+        BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                Opacity="0.1"
+                Offset="0,0"
+                Radius="5"/>
+                </Border.Shadow>
+                <Entry Placeholder="12345678"
+           HorizontalOptions="Fill"
+                       Margin="10,0"
+           x:Name="txtNTClient"
+           Keyboard="Telephone"
+           MaxLength="50"
+           TextColor="Black"
+           FontSize="13"
+           ClearButtonVisibility="WhileEditing"/>
+            </Border>
+
+
+            <Grid ColumnDefinitions="*,*"
+      Padding="0,25"
+      ColumnSpacing="10">
+
+                <Button Grid.Column="0"
+            Text="Cancelar" 
+            BackgroundColor="#FEC2AA"
+            TextColor="#ffffff"
+            CornerRadius="10"
+            HeightRequest="45"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                    Opacity="0.1"
+                    Offset="0,0"
+                    Radius="5"/>
+                    </Button.Shadow>
+                </Button>
+
+                <Button Grid.Column="1"
+                        Text="Guardar"
+                        BackgroundColor="#0595EC"
+                        TextColor="#ffffff"
+                        CornerRadius="10"
+                        HeightRequest="45"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Center"
+                        Clicked="OnEditClient">
+
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                    Opacity="0.1"
+                    Offset="0,0"
+                    Radius="5"/>
+                    </Button.Shadow>
+                </Button>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>
