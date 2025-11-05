@@ -135,14 +135,15 @@
                             <Button x:Name="SettingsButton"
                                     Grid.Column="2"
                                     Padding="5"
-                                    Clicked="OnMemberShipPage"
                                     ImageSource="settings.png"
                                     WidthRequest="30"
                                     HeightRequest="30"
-                                    CommandParameter="{Binding}"
                                     BackgroundColor="Transparent"
                                     VerticalOptions="Center"
-                                    HorizontalOptions="Center"/>
+                                    HorizontalOptions="Center"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ClientsViewModel}}, Path=ToggleMenuCommand}"
+                                    CommandParameter="{Binding}" />
+
                         </Grid>
 
                         <Border Margin="5,0" IsVisible="{Binding IsExpanded}">
@@ -159,7 +160,45 @@
                             </VerticalStackLayout>
                         </Border>
 
+                        <Border Grid.Row="0" Grid.RowSpan="2" x:Name="MenuBorder" AutomationId="MenuBorder" HorizontalOptions="End" VerticalOptions="Start" Margin="0,0,15,0" BackgroundColor="#0595EC" Stroke="#80FFFFFF" StrokeThickness="1" Padding="10" IsVisible="{Binding IsMenuVisible}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10"/>
+                            </Border.StrokeShape>
+                            <Border.Triggers>
+                                <MultiTrigger TargetType="Border">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding IsMenuVisible}" Value="True" />
+                                        <BindingCondition Binding="{Binding IsExpanded}" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Shadow">
+                                        <Setter.Value>
+                                            <Shadow Brush="Black" Opacity="0.35" Offset="0,4" Radius="10"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </MultiTrigger>
+                            </Border.Triggers>
+                            <Grid RowDefinitions="Auto,Auto, Auto" ColumnDefinitions="Auto,*" ColumnSpacing="8" RowSpacing="0">
 
+                                <Image Source="shoppingcart.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="Pagar membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="0" Grid.Column="1">
+                                    <Label.GestureRecognizers></Label.GestureRecognizers>
+                                </Label>
+
+                                <Image Source="eye.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
+                                <Button Text="Ver membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" CommandParameter="{Binding}" Clicked="OnViewMembership" BackgroundColor="Transparent" Padding="0,0,20,0"/>
+
+
+
+                                <Image Source="edit.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="2" Grid.Column="0"/>
+                                <Label Text="Editar" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="2" Grid.Column="1">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer  />
+                                    </Label.GestureRecognizers>
+                                </Label>
+
+
+                            </Grid>
+                        </Border>
 
                     </VerticalStackLayout>
                 </DataTemplate>
@@ -193,4 +232,4 @@
         </Grid>
 
     </Grid>
-</ContentPage>
+</ContentPage>

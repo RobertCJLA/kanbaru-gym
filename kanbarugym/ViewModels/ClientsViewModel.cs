@@ -2,96 +2,98 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using Microsoft.Maui.Controls;
 using kanbarugym.Clases;
 using kanbarugym.Lib;
 
-namespace kanbarugym.ViewModels;
-
-public partial class ClientsViewModel : INotifyPropertyChanged
+namespace kanbarugym.ViewModels
 {
-    public ObservableCollection<ClientesClass> Clientes { get; } = new();
-
-    private List<ClientesClass> _allClientes = new();
-
-    private bool _isBusy;
-    public bool IsBusy
+    public class ClientsViewModel : INotifyPropertyChanged
     {
-        get => _isBusy;
-        set
+        public ObservableCollection<ClientesClass> Clientes { get; } = new();
+        private List<ClientesClass> _allClientes = new();
+
+        private bool _isBusy;
+        public bool IsBusy { get => _isBusy; set { if (_isBusy == value) return; _isBusy = value; OnPropertyChanged(); } }
+
+        public ClientsViewModel()
         {
-            if (_isBusy == value) return;
-            _isBusy = value;
-            OnPropertyChanged();
+            _ = CargarClientes();
         }
-    }
 
-    public ClientsViewModel()
-    {
-        _ = CargarClientes();
-    }
-
-    public async Task CargarClientes()
-    {
-        try
+        public async Task CargarClientes()
         {
-            IsBusy = true;
-            var clientes = await ClientesLib.ObtenerClientes();
-            _allClientes = clientes ?? [];
-            ApplyFilter();
-        }
-        finally
-        {
-            IsBusy = false;
-        }
-    }
-
-    private string? _searchText;
-    public string? SearchText
-    {
-        get => _searchText;
-        set
-        {
-            if (_searchText == value) return;
-            _searchText = value;
-            ApplyFilter();
-        }
-    }
-
-    private void ApplyFilter()
-    {
-        IEnumerable<ClientesClass> filtered = _allClientes;
-        var query = (SearchText ?? string.Empty).Trim();
-        if (!string.IsNullOrWhiteSpace(query))
-        {
-            var tokens = query.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            filtered = _allClientes.Where(c =>
+            try
             {
-                var nombre = c.Nombres ?? string.Empty;
-                return tokens.All(t => nombre.Contains(t, StringComparison.OrdinalIgnoreCase));
-            });
+                IsBusy = true;
+                var clientes = await ClientesLib.ObtenerClientes();
+                _allClientes = clientes ?? new List<ClientesClass>();
+                ApplyFilter();
+            }
+            finally { IsBusy = false; }
         }
 
-        foreach (var it in _allClientes)
-            it.IsExpanded = false;
+        private string? _searchText;
+        public string? SearchText
+        {
+            get => _searchText;
+            set { if (_searchText == value) return; _searchText = value; ApplyFilter(); }
+        }
 
-        Clientes.Clear();
-        foreach (var c in filtered)
-            Clientes.Add(c);
+        private void ApplyFilter()
+        {
+            var filtered = _allClientes.AsEnumerable();
+            var query = (SearchText ?? "").Trim();
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                var tokens = query.Split(' ', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries);
+                filtered = _allClientes.Where(c => tokens.All(t => (c.Nombres ?? "").Contains(t, System.StringComparison.OrdinalIgnoreCase)));
+            }
+
+            foreach (var c in _allClientes) c.IsExpanded = false;
+
+            Clientes.Clear();
+            foreach (var c in filtered) Clientes.Add(c);
+        }
+
+        ICommand? _toggleExpandCommand;
+        public ICommand ToggleExpandCommand => _toggleExpandCommand ??= new Command<ClientesClass>(cliente =>
+        {
+            if (cliente == null) return;
+            var willExpand = !cliente.IsExpanded;
+            foreach (var c in Clientes) c.IsExpanded = false;
+            cliente.IsExpanded = willExpand;
+        });
+
+        ICommand? _toggleMenuCommand;
+        public ICommand ToggleMenuCommand => _toggleMenuCommand ??= new Command<ClientesClass>(cliente =>
+        {
+            if (cliente == null) return;
+            var willShow = !cliente.IsMenuVisible;
+
+            foreach (var c in Clientes) c.IsMenuVisible = false;
+
+            cliente.IsMenuVisible = willShow;
+            OnPropertyChanged(nameof(AnyMenuOpen));
+        });
+
+        ICommand? _closeAllMenusCommand;
+        public ICommand CloseAllMenusCommand => _closeAllMenusCommand ??= new Command(() =>
+        {
+            foreach (var c in Clientes) c.IsMenuVisible = false;
+            OnPropertyChanged(nameof(AnyMenuOpen));
+        });
+
+        public bool AnyMenuOpen => Clientes.Any(c => c.IsMenuVisible);
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
-
-    ICommand? _toggleExpandCommand;
-    public ICommand ToggleExpandCommand => _toggleExpandCommand ??= new Command<ClientesClass>(cliente =>
-    {
-        if (cliente is null) return;
-        var willExpand = !cliente.IsExpanded;
-        foreach (var it in Clientes)
-            it.IsExpanded = false;
-        cliente.IsExpanded = willExpand;
-    });
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string? name = null)
-        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-
 }

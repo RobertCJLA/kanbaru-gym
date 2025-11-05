@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace kanbarugym.Clases
+    namespace kanbarugym.Clases
 {
     public class ClientesClass : INotifyPropertyChanged
     {
@@ -25,6 +25,18 @@ namespace kanbarugym.Clases
             {
                 if (_isExpanded == value) return;
                 _isExpanded = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _isMenuVisible;
+        public bool IsMenuVisible
+        {
+            get => _isMenuVisible;
+            set
+            {
+                if (_isMenuVisible == value) return;
+                _isMenuVisible = value;
                 OnPropertyChanged();
             }
         }
