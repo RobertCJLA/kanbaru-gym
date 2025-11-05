@@ -1,98 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
- xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
- xmlns:pages="clr-namespace:kanbarugym.Pages"
- x:Class="kanbarugym.Pages.EditarEntrenador"
- x:DataType="pages:EditarEntrenador"
- Title="Actualizar entrenador"
- BackgroundColor="White"
- Padding="15,0">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:kanbarugym.Pages"
+             x:Class="kanbarugym.Pages.EditarEntrenador"
+             x:DataType="pages:EditarEntrenador"
+             Title="Actualizar entrenador"
+             BackgroundColor="White"
+             Padding="15,0">
 
- <Shell.TitleView>
- <Grid BackgroundColor="White">
- <VerticalStackLayout Margin="0,10,0,0">
- <Label Text="Actualizar entrenador"
- FontSize="22"
- FontAttributes="Bold"
- Padding="22,0,0,0"
- TextColor="Black"/>
- <Border StrokeThickness="0"
- Margin="0,0,61,0"
- BackgroundColor="#0595EC"
- HeightRequest="5"
- WidthRequest="235"
- HorizontalOptions="Center">
- <Border.StrokeShape>
- <RoundRectangle CornerRadius="100"/>
- </Border.StrokeShape>
- </Border>
- </VerticalStackLayout>
- </Grid>
- </Shell.TitleView>
+    <Shell.TitleView>
+        <Grid BackgroundColor="White">
+            <VerticalStackLayout Margin="0,10,0,0">
+                <Label Text="Actualizar entrenador"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       Padding="20,0,0,0"/>
+                <Border StrokeThickness="0"
+                        Margin="0,0,80,0"
+                        BackgroundColor="#0595EC"
+                        HeightRequest="5"
+                        WidthRequest="230"
+                        HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="100" />
+                    </Border.StrokeShape>
+                </Border>
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.TitleView>
 
- <ScrollView>
- <VerticalStackLayout Margin="0,10,0,0">
+    <ScrollView>
+        <VerticalStackLayout Margin="0,10,0,0" Spacing="10">
 
- <Label Text="Nombres y Apellidos" />
- <Border>
- <Entry x:Name="txtNombreEntrenador" Placeholder="Ingrese nombre completo" />
- </Border>
+            <Label Text="Nombres y Apellidos"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,10,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff"
+                    Padding="10,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
+                </Border.Shadow>
+                <Entry x:Name="txtNombreEntrenador" Placeholder="Ingrese nombre completo" />
+            </Border>
 
- <Label Text="Fecha de Nacimiento" />
- <Border>
- <Entry x:Name="txtFechaNacimientoEntrenador" Placeholder="yyyy-MM-dd" />
- </Border>
+            <Label Text="Fecha de Nacimiento"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff"
+                    Padding="10,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
+                </Border.Shadow>
+                <Entry x:Name="txtFechaNacimientoEntrenador" Placeholder="yyyy-MM-dd" />
+            </Border>
 
- <Label Text="Sexo" />
- <Border>
- <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
- <Picker x:Name="cmbSexoEntrenador"
- Grid.Column="0"
- Title="Selecciona una opcion"
- VerticalOptions="Center"
- BackgroundColor="Transparent">
- <Picker.ItemsSource>
- <x:Array Type="{x:Type x:String}">
- <x:String>Masculino</x:String>
- <x:String>Femenino</x:String>
- </x:Array>
- </Picker.ItemsSource>
- </Picker>
- <Image Grid.Column="1"
- Source="clipborad2.png"
- HeightRequest="40"
- VerticalOptions="Center"
- HorizontalOptions="End"
- Margin="5,0,5,0"
- InputTransparent="True" />
- </Grid>
- </Border>
+            <Label Text="Sexo"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff"
+                    Padding="10,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
+                </Border.Shadow>
+                <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+                    <Picker x:Name="cmbSexoEntrenador"
+                            Grid.Column="0"
+                            Title="Selecciona una opcion"
+                            VerticalOptions="Center"
+                            BackgroundColor="Transparent">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Masculino</x:String>
+                                <x:String>Femenino</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Image Grid.Column="1"
+                           Source="clipborad2.png"
+                           HeightRequest="40"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Margin="5,0,5,0"
+                           InputTransparent="True" />
+                </Grid>
+            </Border>
 
- <Label Text="Experiencia (anios)" />
- <Border>
- <Entry x:Name="txtExperiencia" Placeholder="Ej:5" Keyboard="Numeric" />
- </Border>
+            <Label Text="Experiencia (anios)"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff"
+                    Padding="10,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
+                </Border.Shadow>
+                <Entry x:Name="txtExperiencia" Placeholder="Ej:5" Keyboard="Numeric" />
+            </Border>
 
- <Label Text="Especialidad" />
- <Border>
- <Picker x:Name="cmbEspecialidad" Title="Selecciona una especialidad" ItemsSource="{Binding Especialidades}" />
- </Border>
+            <Label Text="Especialidad"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff"
+                    Padding="10,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
+                </Border.Shadow>
+                <Picker x:Name="cmbEspecialidad"
+                        Title="Selecciona una especialidad"
+                        ItemsSource="{Binding Especialidades}" />
+            </Border>
 
- <Label Text="Correo electronico" />
- <Border>
- <Entry x:Name="txtCorreoEntrenador" Placeholder="correo@dominio.com" Keyboard="Email" />
- </Border>
+            <Label Text="Correo electronico"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff"
+                    Padding="10,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
+                </Border.Shadow>
+                <Entry x:Name="txtCorreoEntrenador" Placeholder="correo@dominio.com" Keyboard="Email" />
+            </Border>
 
- <Label Text="Numero de telefono" />
- <Border>
- <Entry x:Name="txtTelefonoEntrenador" Placeholder="12345678" Keyboard="Telephone" />
- </Border>
+            <Label Text="Numero de telefono"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeThickness="1"
+                    BackgroundColor="#fff"
+                    Padding="10,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10" />
+                </Border.StrokeShape>
+                <Border.Shadow>
+                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
+                </Border.Shadow>
+                <Entry x:Name="txtTelefonoEntrenador" Placeholder="12345678" Keyboard="Telephone" />
+            </Border>
 
- <Grid ColumnDefinitions="*,*" Padding="0,25" ColumnSpacing="10">
- <Button Grid.Column="0" Text="Cancelar" BackgroundColor="#FEC2AA" Clicked="OnCancel" />
- <Button Grid.Column="1" Text="Actualizar" BackgroundColor="#0595EC" Clicked="OnUpdateEntrenador" />
- </Grid>
+            <Grid ColumnDefinitions="*,*" Padding="0,15" ColumnSpacing="10">
 
- </VerticalStackLayout>
- </ScrollView>
+                <Button Grid.Column="0"
+                        Text="Cancelar"
+                        BackgroundColor="#FEC2AA"
+                        TextColor="#ffffff"
+                        CornerRadius="10"
+                        HeightRequest="45"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Center"
+                        Clicked="OnCancel">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                                Opacity="0.1"
+                                Offset="0,0"
+                                Radius="5" />
+                    </Button.Shadow>
+                </Button>
+
+                <Button Grid.Column="1"
+                        Text="Guardar"
+                        BackgroundColor="#0595EC"
+                        TextColor="#ffffff"
+                        CornerRadius="10"
+                        HeightRequest="45"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Center"
+                        Clicked="OnUpdateEntrenador">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+                                Opacity="0.1"
+                                Offset="0,0"
+                                Radius="5" />
+                    </Button.Shadow>
+                </Button>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -3,18 +3,13 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using kanbarugym.Clases;
 using kanbarugym.Lib;
 
 namespace kanbarugym.ViewModels
 {
-    public class ClientsViewModel : INotifyPropertyChanged
+    public partial class ClientsViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<ClientesClass> Clientes { get; } = new();
         private List<ClientesClass> _allClientes = new();
