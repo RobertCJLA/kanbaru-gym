@@ -9,15 +9,14 @@
              BackgroundColor="White"
              Padding="15,0">
 
-
     <Shell.TitleView>
         <Grid BackgroundColor="White">
             <VerticalStackLayout Margin="0,10,0,0">
-                <Label Text="Registrar nuevo entrenador" 
+                <Label Text="Registrar nuevo entrenador"
                        FontSize="22"
-                       FontAttributes="Bold" 
+                       FontAttributes="Bold"
                        Padding="5,0,0,0"
-                       TextColor="Black"/>
+                       TextColor="Black" />
                 <Border StrokeThickness="0"
                         Margin="12,0,61,0"
                         BackgroundColor="#0595EC"
@@ -30,23 +29,68 @@
     </Shell.TitleView>
 
     <ScrollView>
-        <VerticalStackLayout Margin="0,10,0,0">
+        <VerticalStackLayout Margin="0,10,0,0" Spacing="10">
 
             <!-- Nombres y Apellidos -->
-            <Label Text="Nombres y Apellidos" />
-            <Border>
+            <Label Text="Nombres y Apellidos"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,10,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="10,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5" />
+                </Border.Shadow>
                 <Entry x:Name="txtNombreEntrenador" Placeholder="Ingrese nombre completo" />
             </Border>
 
             <!-- Fecha de Nacimiento -->
-            <Label Text="Fecha de Nacimiento" />
-            <Border>
+            <Label Text="Fecha de Nacimiento"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="10,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5" />
+                </Border.Shadow>
                 <Entry x:Name="txtFechaNacimientoEntrenador" Placeholder="YYYY-MM-DD" />
             </Border>
 
             <!-- Sexo -->
-            <Label Text="Sexo" />
-            <Border>
+            <Label Text="Sexo"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="10,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5" />
+                </Border.Shadow>
                 <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
                     <!-- Picker en primera columna, con items definidos -->
                     <Picker x:Name="cmbSexoEntrenador"
@@ -74,33 +118,126 @@
             </Border>
 
             <!-- Experiencia -->
-            <Label Text="Experiencia (años)" />
-            <Border>
+            <Label Text="Experiencia (años)"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="10,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5" />
+                </Border.Shadow>
                 <Entry x:Name="txtExperiencia" Placeholder="Ej: 5" Keyboard="Numeric" />
             </Border>
 
             <!-- Especialidad -->
-            <Label Text="Especialidad" />
-            <Border>
+            <Label Text="Especialidad"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,00,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="10,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5" />
+                </Border.Shadow>
                 <Picker x:Name="cmbEspecialidad" Title="Selecciona una especialidad" ItemsSource="{Binding Especialidades}" />
             </Border>
 
             <!-- Correo electrónico -->
-            <Label Text="Correo electrónico" />
-            <Border>
+            <Label Text="Correo electrónico"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="10,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5" />
+                </Border.Shadow>
                 <Entry x:Name="txtCorreoEntrenador" Placeholder="lagunamoises64@gmail.com" Keyboard="Email" />
             </Border>
 
             <!-- Teléfono -->
-            <Label Text="Número de teléfono" />
-            <Border>
+            <Label Text="Número de teléfono"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   HorizontalOptions="Start"
+                   Margin="0,0,0,-5" />
+            <Border Stroke="#72C9F4"
+                    StrokeShape="RoundRectangle 10"
+                    StrokeThickness="1"
+                    Padding="10,0"
+                    BackgroundColor="#fff">
+                <Border.Shadow>
+                    <Shadow Brush="Black"
+                            Opacity="0.1"
+                            Offset="0,0"
+                            Radius="5" />
+                </Border.Shadow>
                 <Entry x:Name="txtTelefonoEntrenador" Placeholder="12345678" Keyboard="Telephone" />
             </Border>
 
             <!-- Botones -->
-            <Grid ColumnDefinitions="*,*" Padding="0,25" ColumnSpacing="10">
-                <Button Grid.Column="0" Text="Cancelar" BackgroundColor="#FEC2AA" />
-                <Button Grid.Column="1" Text="Guardar" BackgroundColor="#0595EC" Clicked="OnCreateEntrenador" />
+            <Grid ColumnDefinitions="*,*" Padding="0,15" ColumnSpacing="10">
+                <Button Grid.Column="0"
+Text="Cancelar" 
+BackgroundColor="#FEC2AA"
+TextColor="#ffffff"
+CornerRadius="10"
+HeightRequest="45"
+FontAttributes="Bold"
+HorizontalOptions="Fill"
+VerticalOptions="Center">
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+        Opacity="0.1"
+        Offset="0,0"
+        Radius="5"/>
+                    </Button.Shadow>
+                </Button>
+
+                <Button Grid.Column="1"
+            Text="Guardar"
+            BackgroundColor="#0595EC"
+            TextColor="#ffffff"
+            CornerRadius="10"
+            HeightRequest="45"
+            FontAttributes="Bold"
+            HorizontalOptions="Fill"
+            VerticalOptions="Center"
+            Clicked="OnCreateEntrenador">
+
+                    <Button.Shadow>
+                        <Shadow Brush="Black"
+        Opacity="0.1"
+        Offset="0,0"
+        Radius="5"/>
+                    </Button.Shadow>
+                </Button>
             </Grid>
 
         </VerticalStackLayout>

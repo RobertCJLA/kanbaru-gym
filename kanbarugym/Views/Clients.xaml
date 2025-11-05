@@ -44,7 +44,7 @@
 
         <Grid Row="0" HeightRequest="45">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40"/>
+                
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
@@ -61,22 +61,17 @@
                 </Border.Shadow>
             </Border>
 
-            <Image Source="filter.png"
-                   Grid.Column="0"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center"
-                   WidthRequest="20"
-                   HeightRequest="20"/>
-
             <Entry x:Name="searchEntry"
-                   Grid.Column="1"
+                   Grid.Column="0"
+                   Margin="10,0,0,0"
                    Placeholder="Buscar por nombre o apellidos"
                    BackgroundColor="Transparent"
                    VerticalOptions="Center"
                    TextColor="Black"
                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceEventName=TextChanged}"/>
 
-            <Button Grid.Column="2"
+            <Button Grid.Column="1"
+                    Margin="0,0,10,0"
                     ImageSource="search.png"
                     WidthRequest="50"
                     HeightRequest="50"
@@ -177,26 +172,20 @@
                                     </Setter>
                                 </MultiTrigger>
                             </Border.Triggers>
-                            <Grid RowDefinitions="Auto,Auto, Auto" ColumnDefinitions="Auto,*" ColumnSpacing="8" RowSpacing="0">
+                            <Grid RowDefinitions="Auto,Auto, Auto" ColumnDefinitions="Auto,*" ColumnSpacing="0" RowSpacing="-10">
 
-                                <Image Source="shoppingcart.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="0" Grid.Column="0"/>
-                                <Label Text="Pagar membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="0" Grid.Column="1">
-                                    <Label.GestureRecognizers></Label.GestureRecognizers>
-                                </Label>
+                                <ImageButton Source="shoppingcart.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Padding="10"/>
+                                <Button Text="Pagar membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="0" Grid.Column="1" Padding="0,0,5,0" Background="Transparent"/>
 
-                                <Image Source="eye.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="1" Grid.Column="0"/>
+
+                                <ImageButton Source="eye.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Padding="10"/>
                                 <Button Text="Ver membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" CommandParameter="{Binding}" Clicked="OnViewMembership" BackgroundColor="Transparent" Padding="0,0,20,0"/>
 
 
 
-                                <Image Source="edit.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="2" Grid.Column="0"/>
-                                <Label Text="Editar" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="2" Grid.Column="1">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer  />
-                                    </Label.GestureRecognizers>
-                                </Label>
-
-
+                                <ImageButton Source="edit.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" Padding="10"/>
+                                <Button Text="Editar" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="2" Grid.Column="1" Background="Transparent" Padding="0,0,100,0"/>
+                                
                             </Grid>
                         </Border>
 
