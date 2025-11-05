@@ -175,7 +175,7 @@
                             <Grid RowDefinitions="Auto,Auto, Auto" ColumnDefinitions="Auto,*" ColumnSpacing="0" RowSpacing="-10">
 
                                 <ImageButton Source="shoppingcart.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Padding="10"/>
-                                <Button Text="Pagar membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="0" Grid.Column="1" Padding="0,0,5,0" Background="Transparent"/>
+                                <Button Text="Pagar membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="0" Grid.Column="1" Padding="0,0,5,0" Background="Transparent" Clicked="OnPageMembership" CommandParameter="{Binding}" />
 
 
                                 <ImageButton Source="eye.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Padding="10"/>
@@ -184,7 +184,7 @@
 
 
                                 <ImageButton Source="edit.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" Padding="10"/>
-                                <Button Text="Editar" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="2" Grid.Column="1" Background="Transparent" Padding="0,0,100,0"/>
+                                <Button Text="Editar" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="2" Grid.Column="1" Background="Transparent" Padding="0,0,100,0" CommandParameter="{Binding}" Clicked="OnEditPage"/>
                                 
                             </Grid>
                         </Border>

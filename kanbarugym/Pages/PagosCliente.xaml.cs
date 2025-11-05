@@ -19,6 +19,11 @@ public partial class PagosCliente : ContentPage
     {
         pagos = await PagoLib.ObtenerPagosClientes(id);
         PagosCollection.ItemsSource = pagos;
+
+        if (pagos.Count == 0)
+        {
+            labelPagos.IsVisible = true;
+        }
     }
     private async void EliminarPago(object sender, EventArgs e)
     {

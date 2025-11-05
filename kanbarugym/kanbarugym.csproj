@@ -58,6 +58,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\EditarCliente.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\PagosCliente.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

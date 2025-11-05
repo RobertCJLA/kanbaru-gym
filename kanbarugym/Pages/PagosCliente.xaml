@@ -5,131 +5,134 @@
     x:Class="kanbarugym.Pages.PagosCliente"
     Title="Pagos del cliente">
 
-    <ScrollView>
-        <CollectionView
-            x:Name="PagosCollection"
-            Margin="15"
-            SelectionMode="None">
+    <StackLayout>
+        <Label x:Name="labelPagos" Text="Sin pagos" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" IsVisible="False" />
+        <ScrollView>
+            <CollectionView
+                x:Name="PagosCollection"
+                Margin="15"
+                SelectionMode="None">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border
-                        BackgroundColor="#0099FF"
-                        Padding="20"
-                        Shadow="True"
-                        Margin="0,10,0,0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="10" />
-                        </Border.StrokeShape>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            BackgroundColor="#0099FF"
+                            Padding="20"
+                            Shadow="True"
+                            Margin="0,10,0,0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
 
-                        <Grid
-                            RowDefinitions="Auto,Auto,Auto,Auto"
-                            ColumnDefinitions="50,70,*,*"
-                            ColumnSpacing="8"
-                            RowSpacing="12">
+                            <Grid
+                                RowDefinitions="Auto,Auto,Auto,Auto"
+                                ColumnDefinitions="60,70,*,*"
+                                ColumnSpacing="8"
+                                RowSpacing="12">
 
-                            <Label
-                                Text="{Binding Membresia}"
-                                FontSize="16"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                Grid.ColumnSpan="2"
-                                Grid.Row="1" />
+                                <Label
+                                    Text="{Binding Membresia}"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    Grid.ColumnSpan="2"
+                                    Grid.Row="1" />
 
-                            <Label
-                                Text="{Binding Cliente}"
-                                FontSize="18"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.ColumnSpan="3" />
+                                <Label
+                                    Text="{Binding Cliente}"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.ColumnSpan="3" />
 
-                            <Label
-                                Text="Emision"
-                                FontSize="14"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.Row="2"
-                                Grid.Column="0" />
+                                <Label
+                                    Text="Emision"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.Row="2"
+                                    Grid.Column="0" />
 
-                            <Label
-                                Text="11/12/25"
-                                FontSize="10"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.Row="3"
-                                Grid.Column="0"
-                                Margin="0,-10,0,0" />
+                                <Label
+                                    Text="{Binding FechaInicio}"
+                                    FontSize="10"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.Row="3"
+                                    Grid.Column="0"
+                                    Margin="0,-10,0,0" />
 
-                            <Label
-                                Text="Expiracion"
-                                FontSize="14"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                HorizontalOptions="Center" />
+                                <Label
+                                    Text="Expiracion"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    HorizontalOptions="Center" />
 
-                            <Label
-                                Text="11/11/25"
-                                FontSize="10"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.Row="3"
-                                Grid.Column="1"
-                                Margin="0,-10,0,0" />
+                                <Label
+                                    Text="{Binding FechaFin}"
+                                    FontSize="10"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Margin="0,-10,0,0" />
 
-                            <Label
-                                Text="Monto"
-                                FontSize="14"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.Row="2"
-                                Grid.Column="2"
-                                HorizontalOptions="Center" />
+                                <Label
+                                    Text="Monto"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.Row="2"
+                                    Grid.Column="2"
+                                    HorizontalOptions="Center" />
 
-                            <Label
-                                Text="C$ 800"
-                                FontSize="14"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.Row="3"
-                                Grid.Column="2"
-                                HorizontalOptions="Center"
-                                Margin="0,-10,0,0" />
+                                <Label
+                                    Text="{Binding Monto, StringFormat='C$ {0}'}"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.Row="3"
+                                    Grid.Column="2"
+                                    HorizontalOptions="Center"
+                                    Margin="0,-10,0,0" />
 
-                            <Label
-                                Text="Usuario"
-                                FontSize="14"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.Row="2"
-                                Grid.Column="3"
-                                HorizontalOptions="Center" />
+                                <Label
+                                    Text="Usuario"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.Row="2"
+                                    Grid.Column="3"
+                                    HorizontalOptions="Center" />
 
-                            <Label
-                                Text="Admin"
-                                FontSize="10"
-                                FontAttributes="Bold"
-                                TextColor="White"
-                                LineBreakMode="TailTruncation"
-                                Grid.Row="3"
-                                Grid.Column="3"
-                                HorizontalOptions="Center"
-                                Margin="0,-10,0,0" />
+                                <Label
+                                    Text="{Binding Administrador}"
+                                    FontSize="10"
+                                    FontAttributes="Bold"
+                                    TextColor="White"
+                                    LineBreakMode="TailTruncation"
+                                    Grid.Row="3"
+                                    Grid.Column="3"
+                                    HorizontalOptions="Center"
+                                    Margin="0,-10,0,0" />
 
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-        </CollectionView>
-    </ScrollView>
+            </CollectionView>
+        </ScrollView>
+    </StackLayout>
 </ContentPage>
