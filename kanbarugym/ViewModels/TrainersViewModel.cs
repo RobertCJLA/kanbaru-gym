@@ -1,10 +1,11 @@
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using kanbarugym.Clases;
 using kanbarugym.Lib;
 using kanbarugym.Pages;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 
 namespace kanbarugym.ViewModels;
 
@@ -22,28 +23,7 @@ public class TrainersViewModel : INotifyPropertyChanged
 
     public ICommand EditTrainerCommand { get; }
     public ICommand DeleteTrainerCommand { get; }
-
-    public TrainersViewModel()
-    {
-        EditTrainerCommand = new Command<EntrenadorClass>(async t => await EditAsync(t));
-        DeleteTrainerCommand = new Command<EntrenadorClass>(async t => await DeleteAsync(t));
-        _ = CargarEntrenadores();
-    }
-
-    public async Task CargarEntrenadores()
-    {
-        try
-        {
-            IsBusy = true;
-            var list = await EntrenadoresLib.ObtenerEntrenadores();
-            _all = list ?? [];
-            ApplyFilter();
-        }
-        finally
-        {
-            IsBusy = false;
-        }
-    }
+    public ICommand ToggleExpandCommand { get; }
 
     private string? _searchText;
     public string? SearchText
@@ -54,6 +34,33 @@ public class TrainersViewModel : INotifyPropertyChanged
             if (_searchText == value) return;
             _searchText = value;
             ApplyFilter();
+        }
+    }
+
+    public TrainersViewModel()
+    {
+        EditTrainerCommand = new Command<EntrenadorClass>(async t => await EditAsync(t));
+        DeleteTrainerCommand = new Command<EntrenadorClass>(async t => await DeleteAsync(t));
+        ToggleExpandCommand = new Command<EntrenadorClass>(ToggleExpand);
+
+    }
+
+    public async Task CargarEntrenadores()
+    {
+        try
+        {
+            IsBusy = true;
+            var list = await EntrenadoresLib.ObtenerEntrenadores();
+            _all = list ?? new List<EntrenadorClass>();
+            ApplyFilter();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error cargando entrenadores: {ex.Message}");
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
 
@@ -71,19 +78,17 @@ public class TrainersViewModel : INotifyPropertyChanged
         foreach (var e in filtered) Entrenadores.Add(e);
     }
 
-    ICommand? _toggleExpandCommand;
-    public ICommand ToggleExpandCommand => _toggleExpandCommand ??= new Command<EntrenadorClass>(e =>
+    private void ToggleExpand(EntrenadorClass? e)
     {
         if (e is null) return;
         var willExpand = !e.IsExpanded;
         foreach (var it in Entrenadores) it.IsExpanded = false;
         e.IsExpanded = willExpand;
-    });
+    }
 
     private async Task EditAsync(EntrenadorClass? t)
     {
         if (t is null) return;
-        // Navegar a la nueva pantalla EditarEntrenador con el entrenador seleccionado
         await Shell.Current.Navigation.PushAsync(new EditarEntrenador(t));
     }
 
@@ -100,7 +105,6 @@ public class TrainersViewModel : INotifyPropertyChanged
             return;
         }
 
-        // quitar de colecciones y refrescar
         _all.RemoveAll(x => x.Id == t.Id);
         ApplyFilter();
         await Shell.Current.DisplayAlert("Eliminado", "Entrenador eliminado correctamente.", "OK");

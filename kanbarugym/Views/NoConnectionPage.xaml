@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="kanbarugym.Views.NoConnectionPage"
+    BackgroundColor="White"
+    Title="Sin conexión">
+
+    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+        <VerticalStackLayout Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
+            <Image Source="no_internet.png" WidthRequest="150" HeightRequest="150"/>
+            <Label Text="No hay conexión a Internet"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"/>
+            <Label Text="Por favor revisa tu conexión y vuelve a intentarlo."
+                   FontSize="16"
+                   HorizontalTextAlignment="Center"/>
+            <Button Text="Reintentar" Clicked="OnRetryClicked"
+                    BackgroundColor="#0595EC" TextColor="White"
+                    CornerRadius="10" Padding="10,5"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

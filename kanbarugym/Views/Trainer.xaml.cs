@@ -1,3 +1,4 @@
+// Trainer.xaml.cs
 using kanbarugym.ViewModels;
 using kanbarugym.Clases;
 
@@ -16,7 +17,7 @@ public partial class Trainer : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await ViewModel.CargarEntrenadores();
+        await ViewModel.CargarEntrenadores(); // refresca cada vez que vuelves a la pestaña
     }
 
     private void CloseAllMenus()
@@ -25,19 +26,8 @@ public partial class Trainer : ContentPage
             it.IsMenuVisible = false;
     }
 
-    private Element? GetItemRoot(Element start)
-    {
-        // Sube hasta el contenedor del DataTemplate
-        Element? cur = start;
-        while (cur is not null && cur.Parent is not CollectionView && cur.Parent is not null)
-            cur = cur.Parent;
-        // El padre inmediato del template es una CollectionView; regresamos al nodo anterior válido
-        return start; // usaremos el propio start y buscaremos hacia arriba en pocos niveles
-    }
-
     private VisualElement? FindMenuBorder(Element? start)
     {
-        // Buscar ascendiendo unos niveles y luego recorriendo descendientes inmediatos
         Element? node = start;
         for (int i = 0; i < 6 && node is not null; i++)
         {

@@ -1,10 +1,8 @@
-using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Extensions;
+// Clients.xaml.cs
 using kanbarugym.Clases;
 using kanbarugym.Lib;
 using kanbarugym.Pages;
 using kanbarugym.ViewModels;
-using System;
 using Microsoft.Maui.Controls;
 
 namespace kanbarugym.Views;
@@ -19,41 +17,62 @@ public partial class Clients : ContentPage
         BindingContext = ViewModel;
     }
 
-    private void OnViewMembership(object sender, EventArgs e)
+    protected override async void OnAppearing()
     {
-        var button = sender as Button;
-        if (button?.CommandParameter is ClientesClass cliente)
-        {
-            string id = cliente.Id;
-            string nombre = cliente.Nombres;
-
-            Navigation.PushAsync(new PagosCliente(id, nombre));
-        }
+        base.OnAppearing();
+        await ViewModel.CargarClientes(); // refresca cada vez que regresas a la pestaña
     }
-    private void OnPageMembership(object sender, EventArgs e)
-    {
-        var button = sender as Button;
-        if (button?.CommandParameter is ClientesClass cliente)
-        {
-            string id = cliente.Id;
-            string nombre = cliente.Nombres;
 
-            Navigation.PushAsync(new RegstrarMembresia(id, nombre));
-        }
+    private void CloseAllMenus()
+    {
+        foreach (var c in ViewModel.Clientes)
+            c.IsMenuVisible = false;
     }
-    private void OnEditPage(object sender, EventArgs e)
-    {
-        var button = sender as Button;
-        if (button?.CommandParameter is ClientesClass cliente)
-        {
-            string id = cliente.Id;
-            string nombres = cliente.Nombres;
-            string fechaNacimiento = cliente.FechaNacimiento;
-            string correoElectronico = cliente.CorreoElectronico;
-            string telefono = cliente.Telefono;
-            string sexo = cliente.Sexo;
 
-            Navigation.PushAsync(new EditarCliente(id, nombres, fechaNacimiento, correoElectronico, telefono, sexo));
+    private VisualElement? FindMenuBorder(Element? start)
+    {
+        Element? node = start;
+        for (int i = 0; i < 6 && node is not null; i++)
+        {
+            if (node is Layout layout)
+            {
+                foreach (var child in layout.Children)
+                {
+                    if (child is VisualElement ve && ve.AutomationId == "MenuBorder")
+                        return ve;
+                    if (child is Border b && b.AutomationId == "MenuBorder")
+                        return b;
+                }
+            }
+            node = node?.Parent;
+        }
+        return null;
+    }
+
+    private async void OnPageMembership(object sender, EventArgs e)
+    {
+        if ((sender as Button)?.CommandParameter is ClientesClass cliente)
+            await Navigation.PushAsync(new RegstrarMembresia(cliente.Id, cliente.Nombres));
+    }
+
+    private async void OnViewMembership(object sender, EventArgs e)
+    {
+        if ((sender as Button)?.CommandParameter is ClientesClass cliente)
+            await Navigation.PushAsync(new PagosCliente(cliente.Id, cliente.Nombres));
+    }
+
+    private async void OnEditPage(object sender, EventArgs e)
+    {
+        if ((sender as Button)?.CommandParameter is ClientesClass cliente)
+        {
+            await Navigation.PushAsync(new EditarCliente(
+                cliente.Id,
+                cliente.Nombres,
+                cliente.FechaNacimiento,
+                cliente.CorreoElectronico,
+                cliente.Telefono,
+                cliente.Sexo
+            ));
         }
     }
 }
