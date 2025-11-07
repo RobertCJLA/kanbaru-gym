@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:conv="clr-namespace:kanbarugym.Converters"
     xmlns:viewmodels="clr-namespace:kanbarugym.ViewModels"
+    xmlns:controls="clr-namespace:kanbarugym.Views.Controls"
     x:Class="kanbarugym.Views.Trainer"
     x:Name="TrainerPage"
     Title="Lista de entrenadores"
@@ -180,54 +181,14 @@
                             </VerticalStackLayout>
                         </Border>
 
-                        <!-- Overlay menu (to the left of gear). Shadow appears only when IsMenuVisible && IsExpanded -->
-                        <Border
+                        <!-- Reusable floating overlay menu -->
+                        <controls:FloatingMenu
                             Grid.Row="0"
                             Grid.RowSpan="2"
-                            x:Name="MenuBorder"
-                            AutomationId="MenuBorder"
-                            HorizontalOptions="End"
-                            VerticalOptions="Start"
-                            Margin="0,36,46,0"
-                            BackgroundColor="#0595EC"
-                            Stroke="#80FFFFFF"
-                            StrokeThickness="1"
-                            Padding="10"
-                            IsVisible="{Binding IsMenuVisible}">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10" />
-                            </Border.StrokeShape>
-
-                            <Border.Triggers>
-                                <MultiTrigger TargetType="Border">
-                                    <MultiTrigger.Conditions>
-                                        <BindingCondition Binding="{Binding IsMenuVisible}" Value="True" />
-                                        <BindingCondition Binding="{Binding IsExpanded}" Value="True" />
-                                    </MultiTrigger.Conditions>
-                                    <Setter Property="Shadow">
-                                        <Setter.Value>
-                                            <Shadow Brush="Black" Opacity="0.35" Offset="0,4" Radius="10" />
-                                        </Setter.Value>
-                                    </Setter>
-                                </MultiTrigger>
-                            </Border.Triggers>
-
-                            <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="Auto,*" ColumnSpacing="8" RowSpacing="10">
-                                <Image Source="edit.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" />
-                                <Label Text="Editar" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="0" Grid.Column="1">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnEditTrainer" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-
-                                <Image Source="delete_person.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" />
-                                <Label Text="Eliminar" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="1" Grid.Column="1">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnDeleteTrainer" />
-                                    </Label.GestureRecognizers>
-                                </Label>
-                            </Grid>
-                        </Border>
+                            IsOpen="{Binding IsMenuVisible, Mode=TwoWay}"
+                            MenuMargin="0,36,46,0"
+                            EditCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TrainersViewModel}}, Path=EditTrainerCommand}"
+                            DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TrainersViewModel}}, Path=DeleteTrainerCommand}" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
