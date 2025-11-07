@@ -7,7 +7,8 @@
  HorizontalOptions="Fill" VerticalOptions="Fill">
  <Grid x:Name="OverlayRoot"
  BackgroundColor="Transparent"
- HorizontalOptions="Fill" VerticalOptions="Fill">
+ HorizontalOptions="Fill" VerticalOptions="Fill"
+ ZIndex="1000">
  <!-- Outside tap capture -->
  <BoxView x:Name="OutsideTapCatcher"
  BackgroundColor="Transparent"
@@ -17,18 +18,21 @@
  </BoxView.GestureRecognizers>
  </BoxView>
 
- <!-- Menu panel -->
+ <!-- Menu panel, positioned via TranslationX/TranslationY -->
  <Border x:Name="MenuPanel"
  AutomationId="MenuBorder"
- HorizontalOptions="End"
+ HorizontalOptions="Start"
  VerticalOptions="Start"
- Margin="{Binding MenuMargin, Source={x:Reference This}}"
+ Margin="0"
  BackgroundColor="#0595EC"
  Stroke="#80FFFFFF"
  StrokeThickness="1"
  Padding="10"
  Opacity="0"
- Scale="0.95">
+ Scale="0.95"
+ AnchorX="1"
+ AnchorY="0"
+ ZIndex="1001">
  <Border.StrokeShape>
  <RoundRectangle CornerRadius="10" />
  </Border.StrokeShape>

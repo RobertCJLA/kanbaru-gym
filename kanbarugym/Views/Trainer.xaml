@@ -1,218 +1,196 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:conv="clr-namespace:kanbarugym.Converters"
-    xmlns:viewmodels="clr-namespace:kanbarugym.ViewModels"
-    xmlns:controls="clr-namespace:kanbarugym.Views.Controls"
-    x:Class="kanbarugym.Views.Trainer"
-    x:Name="TrainerPage"
-    Title="Lista de entrenadores"
-    BackgroundColor="White">
+ xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:conv="clr-namespace:kanbarugym.Converters"
+ xmlns:viewmodels="clr-namespace:kanbarugym.ViewModels"
+ xmlns:controls="clr-namespace:kanbarugym.Views.Controls"
+ x:Class="kanbarugym.Views.Trainer"
+ x:Name="TrainerPage"
+ Title="Lista de entrenadores"
+ BackgroundColor="White">
 
-    <ContentPage.BindingContext>
-        <viewmodels:TrainersViewModel />
-    </ContentPage.BindingContext>
+ <ContentPage.BindingContext>
+ <viewmodels:TrainersViewModel />
+ </ContentPage.BindingContext>
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <conv:LastNameInitialConverter x:Key="LastNameInitialConverter" />
-            <conv:AgeFromBirthdateConverter x:Key="AgeFromBirthdateConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
+ <ContentPage.Resources>
+ <ResourceDictionary>
+ <conv:LastNameInitialConverter x:Key="LastNameInitialConverter" />
+ <conv:AgeFromBirthdateConverter x:Key="AgeFromBirthdateConverter" />
+ </ResourceDictionary>
+ </ContentPage.Resources>
 
-    <Shell.TitleView>
-        <Grid>
-            <VerticalStackLayout Margin="0,10,15,0">
-                <Label
-                    Text="Lista de entrenadores"
-                    FontSize="22"
-                    HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Center"
-                    FontAttributes="Bold"
-                    TextColor="Black"
-                    HorizontalOptions="Fill"
-                    VerticalOptions="Fill" />
-                <Border
-                    StrokeThickness="0"
-                    BackgroundColor="#0595EC"
-                    HeightRequest="5"
-                    WidthRequest="230"
-                    HorizontalOptions="Center">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="100" />
-                    </Border.StrokeShape>
-                </Border>
-            </VerticalStackLayout>
-        </Grid>
-    </Shell.TitleView>
+ <Shell.TitleView>
+ <Grid>
+ <VerticalStackLayout Margin="0,10,15,0">
+ <Label
+ Text="Lista de entrenadores"
+ FontSize="22"
+ HorizontalTextAlignment="Center"
+ VerticalTextAlignment="Center"
+ FontAttributes="Bold"
+ TextColor="Black"
+ HorizontalOptions="Fill"
+ VerticalOptions="Fill" />
+ <Border
+ StrokeThickness="0"
+ BackgroundColor="#0595EC"
+ HeightRequest="5"
+ WidthRequest="230"
+ HorizontalOptions="Center">
+ <Border.StrokeShape>
+ <RoundRectangle CornerRadius="100" />
+ </Border.StrokeShape>
+ </Border>
+ </VerticalStackLayout>
+ </Grid>
+ </Shell.TitleView>
 
-    <Grid Padding="20,10" RowDefinitions="Auto,*">
-        <!-- Search row -->
-        <Grid Row="0" HeightRequest="45">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="40" />
-            </Grid.ColumnDefinitions>
+ <Grid x:Name="RootGrid" Padding="20,10" RowDefinitions="Auto,*">
+ <!-- Search row -->
+ <Grid Row="0" HeightRequest="45">
+ <Grid.ColumnDefinitions>
+ <ColumnDefinition Width="*" />
+ <ColumnDefinition Width="40" />
+ </Grid.ColumnDefinitions>
 
-            <Border
-                Grid.ColumnSpan="3"
-                Stroke="#72C9F4"
-                StrokeThickness="1"
-                BackgroundColor="White"
-                Padding="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10" />
-                </Border.StrokeShape>
-                <Border.Shadow>
-                    <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
-                </Border.Shadow>
-            </Border>
+ <Border
+ Grid.ColumnSpan="3"
+ Stroke="#72C9F4"
+ StrokeThickness="1"
+ BackgroundColor="White"
+ Padding="0">
+ <Border.StrokeShape>
+ <RoundRectangle CornerRadius="10" />
+ </Border.StrokeShape>
+ <Border.Shadow>
+ <Shadow Brush="Black" Opacity="0.1" Offset="0,0" Radius="5" />
+ </Border.Shadow>
+ </Border>
 
-            <Entry
-                x:Name="searchEntry"
-                Grid.Column="0"
-                Placeholder="Buscar por nombre o apellidos"
-                BackgroundColor="Transparent"
-                VerticalOptions="Center"
-                Margin="10,0,0,0"
-                TextColor="Black"
-                Text="{Binding SearchText, Mode=TwoWay, UpdateSourceEventName=TextChanged}" />
+ <Entry
+ x:Name="searchEntry"
+ Grid.Column="0"
+ Placeholder="Buscar por nombre o apellidos"
+ BackgroundColor="Transparent"
+ VerticalOptions="Center"
+ Margin="10,0,0,0"
+ TextColor="Black"
+ Text="{Binding SearchText, Mode=TwoWay, UpdateSourceEventName=TextChanged}" />
 
-            <Button
-                Grid.Column="1"
-                ImageSource="search.png"
-                WidthRequest="50"
-                HeightRequest="50"
-                BackgroundColor="Transparent"
-                Margin="0,0,10,0" />
-        </Grid>
+ <Button
+ Grid.Column="1"
+ ImageSource="search.png"
+ WidthRequest="50"
+ HeightRequest="50"
+ BackgroundColor="Transparent"
+ Margin="0,0,10,0" />
+ </Grid>
 
-        <!-- Collection -->
-        <CollectionView
-            Grid.Row="1"
-            x:Name="EntrenadoresCollection"
-            Margin="0,15,0,0"
-            ItemsSource="{Binding Entrenadores}"
-            SelectionMode="None">
+ <!-- Collection -->
+ <CollectionView
+ Grid.Row="1"
+ x:Name="EntrenadoresCollection"
+ Margin="0,15,0,0"
+ ItemsSource="{Binding Entrenadores}"
+ SelectionMode="None">
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid RowSpacing="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+ <CollectionView.ItemTemplate>
+ <DataTemplate>
+ <Grid RowSpacing="10">
+ <Grid.RowDefinitions>
+ <RowDefinition Height="Auto" />
+ <RowDefinition Height="Auto" />
+ </Grid.RowDefinitions>
 
-                        <!-- Header -->
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="40" />
-                            </Grid.ColumnDefinitions>
+ <!-- Header -->
+ <Grid Grid.Row="0">
+ <Grid.ColumnDefinitions>
+ <ColumnDefinition Width="40" />
+ <ColumnDefinition Width="*" />
+ <ColumnDefinition Width="40" />
+ </Grid.ColumnDefinitions>
 
-                            <Border
-                                Grid.Column="0"
-                                BackgroundColor="#0595EC"
-                                StrokeThickness="0"
-                                HeightRequest="40"
-                                WidthRequest="40"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Start">
-                                <Border.StrokeShape>
-                                    <Ellipse />
-                                </Border.StrokeShape>
+ <Border
+ Grid.Column="0"
+ BackgroundColor="#0595EC"
+ StrokeThickness="0"
+ HeightRequest="40"
+ WidthRequest="40"
+ VerticalOptions="Center"
+ HorizontalOptions="Start">
+ <Border.StrokeShape>
+ <Ellipse />
+ </Border.StrokeShape>
 
-                                <Label
-                                    Text="{Binding Nombres, Converter={StaticResource LastNameInitialConverter}}"
-                                    TextColor="White"
-                                    FontAttributes="Bold"
-                                    FontSize="14"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    HorizontalTextAlignment="Center"
-                                    VerticalTextAlignment="Center" />
-                            </Border>
+ <Label
+ Text="{Binding Nombres, Converter={StaticResource LastNameInitialConverter}}"
+ TextColor="White"
+ FontAttributes="Bold"
+ FontSize="14"
+ HorizontalOptions="Center"
+ VerticalOptions="Center"
+ HorizontalTextAlignment="Center"
+ VerticalTextAlignment="Center" />
+ </Border>
 
-                            <Label
-                                Grid.Column="1"
-                                Text="{Binding Nombres}"
-                                FontAttributes="Bold"
-                                Margin="5,0"
-                                FontSize="16"
-                                LineBreakMode="TailTruncation"
-                                VerticalOptions="Center">
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TrainersViewModel}}, Path=ToggleExpandCommand}"
-                                        CommandParameter="{Binding}" />
-                                </Label.GestureRecognizers>
-                            </Label>
+ <Label
+ Grid.Column="1"
+ Text="{Binding Nombres}"
+ FontAttributes="Bold"
+ Margin="5,0"
+ FontSize="16"
+ LineBreakMode="TailTruncation"
+ VerticalOptions="Center">
+ <Label.GestureRecognizers>
+ <TapGestureRecognizer
+ Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TrainersViewModel}}, Path=ToggleExpandCommand}"
+ CommandParameter="{Binding}" />
+ </Label.GestureRecognizers>
+ </Label>
 
-                            <ImageButton
-                                x:Name="GearBtn"
-                                Grid.Column="2"
-                                Source="settings.png"
-                                WidthRequest="20"
-                                HeightRequest="20"
-                                Padding="5"
-                                BackgroundColor="Transparent"
-                                Clicked="OnGearClicked" />
-                        </Grid>
+ <ImageButton
+ x:Name="GearBtn"
+ Grid.Column="2"
+ Source="settings.png"
+ WidthRequest="20"
+ HeightRequest="20"
+ Padding="5"
+ BackgroundColor="Transparent"
+ Clicked="OnGearClicked" />
+ </Grid>
 
-                        <!-- Details (expandable) -->
-                        <Border
-                            Grid.Row="1"
-                            Margin="5,0"
-                            IsVisible="{Binding IsExpanded}">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10" />
-                            </Border.StrokeShape>
+ <!-- Details (expandable) -->
+ <Border
+ Grid.Row="1"
+ Margin="5,0"
+ IsVisible="{Binding IsExpanded}">
+ <Border.StrokeShape>
+ <RoundRectangle CornerRadius="10" />
+ </Border.StrokeShape>
 
-                            <VerticalStackLayout BackgroundColor="#0595EC" Padding="20,10">
-                                <Label Text="{Binding CorreoElectronico}" TextColor="White" FontSize="18" />
-                                <Label Text="{Binding Telefono}" TextColor="White" FontSize="18" />
-                                <Label Text="{Binding Especialidad}" TextColor="White" FontSize="18" />
-                                <Label
-                                    Text="{Binding FechaNacimiento, Converter={StaticResource AgeFromBirthdateConverter}, StringFormat='Edad: {0} años'}"
-                                    TextColor="White"
-                                    FontSize="18" />
-                            </VerticalStackLayout>
-                        </Border>
+ <VerticalStackLayout BackgroundColor="#0595EC" Padding="20,10">
+ <Label Text="{Binding CorreoElectronico}" TextColor="White" FontSize="18" />
+ <Label Text="{Binding Telefono}" TextColor="White" FontSize="18" />
+ <Label Text="{Binding Especialidad}" TextColor="White" FontSize="18" />
+ <Label
+ Text="{Binding FechaNacimiento, Converter={StaticResource AgeFromBirthdateConverter}, StringFormat='Edad: {0} años'}"
+ TextColor="White"
+ FontSize="18" />
+ </VerticalStackLayout>
+ </Border>
+ </Grid>
+ </DataTemplate>
+ </CollectionView.ItemTemplate>
+ </CollectionView>
 
-                        <!-- Reusable floating overlay menu -->
-                        <controls:FloatingMenu
-                            Grid.Row="0"
-                            Grid.RowSpan="2"
-                            IsOpen="{Binding IsMenuVisible, Mode=TwoWay}"
-                            MenuMargin="0,36,46,0"
-                            EditCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TrainersViewModel}}, Path=EditTrainerCommand}"
-                            DeleteCommand="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TrainersViewModel}}, Path=DeleteTrainerCommand}" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <!-- Loading overlay -->
-        <Grid
-            x:Name="LoadingOverlay"
-            Grid.RowSpan="2"
-            IsVisible="{Binding IsBusy}"
-            BackgroundColor="Transparent">
-            <Grid VerticalOptions="Center" HorizontalOptions="Center">
-                <Border
-                    x:Name="LoadingCard"
-                    BackgroundColor="#CCFFFFFF"
-                    StrokeThickness="0"
-                    Padding="20"
-                    Shadow="10,10,0.3,Transparent">
-                    <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
-                        <ActivityIndicator x:Name="SpinnerAI" IsRunning="{Binding IsBusy}" Color="#0595EC" WidthRequest="48" HeightRequest="48" />
-                        <Label Text="Cargando..." TextColor="#0595EC" FontAttributes="Bold" FontSize="16" HorizontalOptions="Center" />
-                    </VerticalStackLayout>
-                </Border>
-            </Grid>
-        </Grid>
-    </Grid>
+ <!-- Page-level overlay floating menu -->
+ <controls:FloatingMenu
+ x:Name="OverlayMenu"
+ Grid.RowSpan="2"
+ ZIndex="2000"
+ EditCommand="{Binding EditTrainerCommand}"
+ DeleteCommand="{Binding DeleteTrainerCommand}" />
+ </Grid>
 </ContentPage>
