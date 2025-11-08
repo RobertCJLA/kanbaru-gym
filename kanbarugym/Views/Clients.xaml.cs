@@ -1,15 +1,17 @@
 // Clients.xaml.cs
 using kanbarugym.Clases;
-using kanbarugym.Lib;
 using kanbarugym.Pages;
 using kanbarugym.ViewModels;
 using Microsoft.Maui.Controls;
+using kanbarugym.Views.Controls;
 
 namespace kanbarugym.Views;
 
 public partial class Clients : ContentPage
 {
     public ClientsViewModel ViewModel { get; } = new();
+    ClientesClass? _currentClient;
+    VisualElement? _currentAnchor;
 
     public Clients()
     {
@@ -20,59 +22,32 @@ public partial class Clients : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await ViewModel.CargarClientes(); // refresca cada vez que regresas a la pestaña
+        await ViewModel.CargarClientes();
     }
 
-    private void CloseAllMenus()
+    void OnGearClicked(object sender, EventArgs e)
     {
-        foreach (var c in ViewModel.Clientes)
-            c.IsMenuVisible = false;
-    }
+        if (sender is not ImageButton btn || btn.CommandParameter is not ClientesClass cliente) return;
+        var menu = ClientsMenu; // x:Name in XAML
+        if (menu == null) return;
 
-    private VisualElement? FindMenuBorder(Element? start)
-    {
-        Element? node = start;
-        for (int i = 0; i < 6 && node is not null; i++)
+        if (menu.IsOpen && ReferenceEquals(_currentClient, cliente))
         {
-            if (node is Layout layout)
-            {
-                foreach (var child in layout.Children)
-                {
-                    if (child is VisualElement ve && ve.AutomationId == "MenuBorder")
-                        return ve;
-                    if (child is Border b && b.AutomationId == "MenuBorder")
-                        return b;
-                }
-            }
-            node = node?.Parent;
+            menu.Hide();
+            _currentClient = null;
+            _currentAnchor = null;
+            return;
         }
-        return null;
-    }
 
-    private async void OnPageMembership(object sender, EventArgs e)
-    {
-        if ((sender as Button)?.CommandParameter is ClientesClass cliente)
-            await Navigation.PushAsync(new RegstrarMembresia(cliente.Id, cliente.Nombres));
-    }
+        _currentClient = cliente;
+        _currentAnchor = btn;
+        menu.TargetClient = cliente;
 
-    private async void OnViewMembership(object sender, EventArgs e)
-    {
-        if ((sender as Button)?.CommandParameter is ClientesClass cliente)
-            await Navigation.PushAsync(new PagosCliente(cliente.Id, cliente.Nombres));
-    }
+        // Asignar comandos (navegación) usando closures con cliente actual
+        menu.PayCommand = new Command(() => Navigation.PushAsync(new RegstrarMembresia(cliente.Id, cliente.Nombres)));
+        menu.ViewCommand = new Command(() => Navigation.PushAsync(new PagosCliente(cliente.Id, cliente.Nombres)));
+        menu.EditCommand = new Command(() => Navigation.PushAsync(new EditarCliente(cliente.Id, cliente.Nombres, cliente.FechaNacimiento, cliente.CorreoElectronico, cliente.Telefono, cliente.Sexo)));
 
-    private async void OnEditPage(object sender, EventArgs e)
-    {
-        if ((sender as Button)?.CommandParameter is ClientesClass cliente)
-        {
-            await Navigation.PushAsync(new EditarCliente(
-                cliente.Id,
-                cliente.Nombres,
-                cliente.FechaNacimiento,
-                cliente.CorreoElectronico,
-                cliente.Telefono,
-                cliente.Sexo
-            ));
-        }
+        menu.ShowFor(btn, RootGrid, ClientesCollection);
     }
 }

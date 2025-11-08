@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ x:Class="kanbarugym.Views.Controls.ClientsFloatingMenu"
+ x:Name="This"
+ IsVisible="False"
+ HorizontalOptions="Fill" VerticalOptions="Fill">
+ 
+ <Grid x:Name="OverlayRoot" BackgroundColor="Transparent" HorizontalOptions="Fill" VerticalOptions="Fill" ZIndex="1000">
+ 
+ <!-- Outside tap capture -->
+ <BoxView x:Name="OutsideTapCatcher" BackgroundColor="Transparent" InputTransparent="False">
+ <BoxView.GestureRecognizers>
+ <TapGestureRecognizer Tapped="OnOutsideTapped" />
+ </BoxView.GestureRecognizers>
+ </BoxView>
+ 
+ <!-- Menu panel positioned via TranslationX/Y, same styling as trainer -->
+ <Border x:Name="MenuPanel"
+ AutomationId="MenuBorder"
+ HorizontalOptions="Start"
+ VerticalOptions="Start"
+ Margin="0"
+ BackgroundColor="#0595EC"
+ Stroke="#80FFFFFF"
+ StrokeThickness="1"
+ Padding="10"
+ Opacity="0"
+ Scale="0.90"
+ AnchorX="0"
+ AnchorY="0"
+ InputTransparent="False"
+ ZIndex="1001">
+ <Border.StrokeShape>
+ <RoundRectangle CornerRadius="10" />
+ </Border.StrokeShape>
+ <Border.Shadow>
+ <Shadow Brush="Black" Opacity="0.35" Offset="0,4" Radius="10" />
+ </Border.Shadow>
+ 
+ <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*" ColumnSpacing="8" RowSpacing="10">
+ <Image Source="shoppingcart.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" />
+ <Label Text="{Binding PayText, Source={x:Reference This}}" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="0" Grid.Column="1">
+ <Label.GestureRecognizers>
+ <TapGestureRecognizer Tapped="OnPayTapped" />
+ </Label.GestureRecognizers>
+ </Label>
+ 
+ <Image Source="eye.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" />
+ <Label Text="{Binding ViewText, Source={x:Reference This}}" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="1" Grid.Column="1">
+ <Label.GestureRecognizers>
+ <TapGestureRecognizer Tapped="OnViewTapped" />
+ </Label.GestureRecognizers>
+ </Label>
+ 
+ <Image Source="edit.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" />
+ <Label Text="{Binding EditText, Source={x:Reference This}}" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="2" Grid.Column="1">
+ <Label.GestureRecognizers>
+ <TapGestureRecognizer Tapped="OnEditTapped" />
+ </Label.GestureRecognizers>
+ </Label>
+ </Grid>
+ </Border>
+ </Grid>
+</ContentView>

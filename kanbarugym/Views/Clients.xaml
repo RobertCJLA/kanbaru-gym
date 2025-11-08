@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:conv="clr-namespace:kanbarugym.Converters"
              xmlns:viewmodels="clr-namespace:kanbarugym.ViewModels"
+             xmlns:controls="clr-namespace:kanbarugym.Views.Controls"
              x:Class="kanbarugym.Views.Clients"
              x:Name="ThisPage"
              Title="Lista de Clientes"
@@ -27,24 +28,24 @@
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
                        FontAttributes="Bold"
-                       TextColor="Black"
-                       HorizontalOptions="Fill"
-                       VerticalOptions="Fill"/>
+                       TextColor="Black" />
                 <Border StrokeThickness="0"
                         BackgroundColor="#0595EC"
-                        StrokeShape="RoundRectangle 100,100"
                         HeightRequest="5"
                         WidthRequest="165"
-                        HorizontalOptions="Center" />
+                        HorizontalOptions="Center">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="100" />
+                    </Border.StrokeShape>
+                </Border>
             </VerticalStackLayout>
         </Grid>
     </Shell.TitleView>
 
-    <Grid Padding="20,10" RowDefinitions="Auto,*">
-
+    <!-- Root grid named for floating overlay calculations -->
+    <Grid x:Name="RootGrid" Padding="20,10" RowDefinitions="Auto,*">
         <Grid Row="0" HeightRequest="45">
             <Grid.ColumnDefinitions>
-                
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
@@ -127,66 +128,30 @@
                                 </Label.GestureRecognizers>
                             </Label>
 
-                            <Button x:Name="SettingsButton"
-                                    Grid.Column="2"
-                                    Padding="5"
-                                    ImageSource="settings.png"
-                                    WidthRequest="30"
-                                    HeightRequest="30"
-                                    BackgroundColor="Transparent"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ClientsViewModel}}, Path=ToggleMenuCommand}"
-                                    CommandParameter="{Binding}" />
-
+                            <!-- Gear button uses floating menu now -->
+                            <ImageButton x:Name="SettingsButton"
+                                         Grid.Column="2"
+                                         Padding="5"
+                                         Source="settings.png"
+                                         WidthRequest="30"
+                                         HeightRequest="30"
+                                         BackgroundColor="Transparent"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="Center"
+                                         Clicked="OnGearClicked"
+                                         CommandParameter="{Binding}" />
                         </Grid>
 
                         <Border Margin="5,0" IsVisible="{Binding IsExpanded}">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10"/>
                             </Border.StrokeShape>
-                            <VerticalStackLayout BackgroundColor="#0595EC" Padding="20,10">
+                            <VerticalStackLayout BackgroundColor="#0595EC" Padding="20,10" Spacing="6">
                                 <Label Text="{Binding CorreoElectronico}" TextColor="White" FontSize="18"/>
                                 <Label Text="{Binding Telefono}" TextColor="White" FontSize="18"/>
                                 <Label Text="{Binding Sexo}" TextColor="White" FontSize="18"/>
-                                <Label Text="{Binding FechaNacimiento, Converter={StaticResource AgeFromBirthdateConverter}, StringFormat='Edad: {0} años'}"
-                                       TextColor="White"
-                                       FontSize="18"/>
+                                <Label Text="{Binding FechaNacimiento, Converter={StaticResource AgeFromBirthdateConverter}, StringFormat='Edad: {0} años'}" TextColor="White" FontSize="18"/>
                             </VerticalStackLayout>
-                        </Border>
-
-                        <Border Grid.Row="0" Grid.RowSpan="2" x:Name="MenuBorder" AutomationId="MenuBorder" HorizontalOptions="End" VerticalOptions="Start" Margin="0,0,15,0" BackgroundColor="#0595EC" Stroke="#80FFFFFF" StrokeThickness="1" Padding="10" IsVisible="{Binding IsMenuVisible}">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10"/>
-                            </Border.StrokeShape>
-                            <Border.Triggers>
-                                <MultiTrigger TargetType="Border">
-                                    <MultiTrigger.Conditions>
-                                        <BindingCondition Binding="{Binding IsMenuVisible}" Value="True" />
-                                        <BindingCondition Binding="{Binding IsExpanded}" Value="True" />
-                                    </MultiTrigger.Conditions>
-                                    <Setter Property="Shadow">
-                                        <Setter.Value>
-                                            <Shadow Brush="Black" Opacity="0.35" Offset="0,4" Radius="10"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </MultiTrigger>
-                            </Border.Triggers>
-                            <Grid RowDefinitions="Auto,Auto, Auto" ColumnDefinitions="Auto,*" ColumnSpacing="0" RowSpacing="-10">
-
-                                <ImageButton Source="shoppingcart.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="0" Grid.Column="0" Padding="10"/>
-                                <Button Text="Pagar membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="0" Grid.Column="1" Padding="0,0,5,0" Background="Transparent" Clicked="OnPageMembership" CommandParameter="{Binding}" />
-
-
-                                <ImageButton Source="eye.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="1" Grid.Column="0" Padding="10"/>
-                                <Button Text="Ver membresía" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="1" Grid.Column="1" CommandParameter="{Binding}" Clicked="OnViewMembership" BackgroundColor="Transparent" Padding="0,0,20,0"/>
-
-
-
-                                <ImageButton Source="edit.png" WidthRequest="20" HeightRequest="20" VerticalOptions="Center" Grid.Row="2" Grid.Column="0" Padding="10"/>
-                                <Button Text="Editar" TextColor="White" FontSize="18" VerticalOptions="Center" Grid.Row="2" Grid.Column="1" Background="Transparent" Padding="0,0,100,0" CommandParameter="{Binding}" Clicked="OnEditPage"/>
-                                
-                            </Grid>
                         </Border>
 
                     </VerticalStackLayout>
@@ -194,6 +159,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
+        <!-- Loading overlay -->
         <Grid x:Name="LoadingOverlay"
               Grid.RowSpan="2"
               IsVisible="{Binding IsBusy}"
@@ -203,7 +169,7 @@
                 <Border BackgroundColor="#CCFFFFFF"
                         StrokeThickness="0"
                         Padding="20"
-                        StrokeShape="RoundRectangle 20">
+                        StrokeShape="RoundRectangle20">
                     <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center">
                         <ActivityIndicator
                             IsRunning="{Binding IsBusy}"
@@ -220,5 +186,14 @@
             </Grid>
         </Grid>
 
+        <!-- Floating menu overlay for client actions -->
+        <controls:ClientsFloatingMenu x:Name="ClientsMenu"
+                                      Grid.RowSpan="2"
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand"
+                                      ZIndex="1500"
+                                      PayText="Pagar membresía"
+                                      ViewText="Ver membresía"
+                                      EditText="Editar" />
     </Grid>
-</ContentPage>
+</ContentPage>

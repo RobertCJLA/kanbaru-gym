@@ -1,87 +1,58 @@
 // Trainer.xaml.cs
 using kanbarugym.ViewModels;
 using kanbarugym.Clases;
+using Microsoft.Maui.Controls;
 
 namespace kanbarugym.Views;
 
 public partial class Trainer : ContentPage
 {
     public TrainersViewModel ViewModel { get; } = new();
+    private Button? _currentGearBtn;
+    private EntrenadorClass? _currentTrainer;
 
     public Trainer()
     {
         InitializeComponent();
         BindingContext = ViewModel;
+        EntrenadoresCollection.SizeChanged += (_, __) => RepositionOverlay();
+        RootGrid.SizeChanged += (_, __) => RepositionOverlay();
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await ViewModel.CargarEntrenadores(); // refresca cada vez que vuelves a la pestaña
+        await ViewModel.CargarEntrenadores();
     }
 
-    private void CloseAllMenus()
+    private void RepositionOverlay()
     {
-        foreach (var it in ViewModel.Entrenadores)
-            it.IsMenuVisible = false;
+        var overlay = this.FindByName<kanbarugym.Views.Controls.FloatingMenu>("OverlayMenu");
+        if (overlay is null || !overlay.IsOpen || _currentGearBtn is null)
+            return;
+        overlay.ShowFor(_currentGearBtn, RootGrid, EntrenadoresCollection);
     }
 
-    private VisualElement? FindMenuBorder(Element? start)
+    private void OnGearClicked(object sender, EventArgs e)
     {
-        Element? node = start;
-        for (int i = 0; i < 6 && node is not null; i++)
+        if (sender is not Button btn || btn.CommandParameter is not EntrenadorClass entrenador)
+            return;
+        var overlay = this.FindByName<kanbarugym.Views.Controls.FloatingMenu>("OverlayMenu");
+        if (overlay is null) return;
+
+        // Toggle si el mismo engrane
+        if (overlay.IsOpen && ReferenceEquals(_currentTrainer, entrenador))
         {
-            if (node is Layout layout)
-            {
-                foreach (var child in layout.Children)
-                {
-                    if (child is VisualElement ve && ve.AutomationId == "MenuBorder")
-                        return ve;
-                    if (child is Border b && b.AutomationId == "MenuBorder")
-                        return b;
-                }
-            }
-            node = node?.Parent;
+            overlay.Hide();
+            _currentGearBtn = null;
+            _currentTrainer = null;
+            return;
         }
-        return null;
-    }
 
-    private async void OnGearClicked(object sender, EventArgs e)
-    {
-        if (sender is ImageButton btn && btn.BindingContext is EntrenadorClass entrenador)
-        {
-            var show = !entrenador.IsMenuVisible;
-            CloseAllMenus();
-            entrenador.IsMenuVisible = show;
-
-            var menu = FindMenuBorder(btn);
-            if (menu is not null)
-            {
-                if (show)
-                    await Task.WhenAll(menu.FadeTo(1.0, 150, Easing.CubicOut), menu.ScaleTo(1.0, 150, Easing.CubicOut));
-                else
-                    await Task.WhenAll(menu.FadeTo(0.08, 150, Easing.CubicIn), menu.ScaleTo(0.95, 150, Easing.CubicIn));
-            }
-        }
-    }
-
-    private void OnEditTrainer(object? sender, TappedEventArgs e)
-    {
-        if ((sender as Element)?.BindingContext is EntrenadorClass entrenador)
-        {
-            CloseAllMenus();
-            if (ViewModel.EditTrainerCommand?.CanExecute(entrenador) == true)
-                ViewModel.EditTrainerCommand.Execute(entrenador);
-        }
-    }
-
-    private void OnDeleteTrainer(object? sender, TappedEventArgs e)
-    {
-        if ((sender as Element)?.BindingContext is EntrenadorClass entrenador)
-        {
-            CloseAllMenus();
-            if (ViewModel.DeleteTrainerCommand?.CanExecute(entrenador) == true)
-                ViewModel.DeleteTrainerCommand.Execute(entrenador);
-        }
+        _currentGearBtn = btn;
+        _currentTrainer = entrenador;
+        // No cambiar el BindingContext del overlay para no romper los bindings de comandos
+        overlay.TargetTrainer = entrenador; // pasar el entrenador seleccionado
+        overlay.ShowFor(btn, RootGrid, EntrenadoresCollection);
     }
 }
