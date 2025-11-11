@@ -109,7 +109,7 @@
  </CollectionView>
 
  <!-- Floating menu overlay -->
- <controls:FloatingMenu x:Name="OverlayMenu" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ZIndex="1000" EditCommand="{Binding EditTrainerCommand}" DeleteCommand="{Binding DeleteTrainerCommand}" />
+ <controls:FloatingMenu x:Name="OverlayMenu" Grid.RowSpan="2" HorizontalOptions="Fill" VerticalOptions="Fill" ZIndex="1000" EditCommand="{Binding EditTrainerCommand}" DeleteCommand="{Binding DeleteTrainerCommand}" />
 
  <!-- Loading overlay (copiado de Clients) -->
  <Grid x:Name="LoadingOverlay" Grid.RowSpan="2" IsVisible="{Binding IsBusy}" BackgroundColor="Transparent" InputTransparent="False">
