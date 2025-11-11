@@ -189,11 +189,14 @@
         <!-- Floating menu overlay for client actions -->
         <controls:ClientsFloatingMenu x:Name="ClientsMenu"
                                       Grid.RowSpan="2"
-                                      HorizontalOptions="FillAndExpand"
-                                      VerticalOptions="FillAndExpand"
+                                      HorizontalOptions="Fill"
+                                      VerticalOptions="Fill"
                                       ZIndex="1500"
                                       PayText="Pagar membresía"
                                       ViewText="Ver membresía"
-                                      EditText="Editar" />
+                                      EditText="Editar" 
+                                      
+                                      />
+
     </Grid>
 </ContentPage>

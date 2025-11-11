@@ -132,9 +132,9 @@
                                     Grid.Row="0"
                                     Grid.ColumnSpan="4"
                                     Text=" "
-                                    FontSize="22"
+                                    FontSize="16"
                                     FontAttributes="Bold"
-                                    HorizontalOptions="Center">
+                                    HorizontalOptions="End">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding Activo}" Value="True">
                                             <Setter Property="Text" Value="ACTIVO" />
