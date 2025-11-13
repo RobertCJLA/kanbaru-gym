@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-    namespace kanbarugym.Clases
+namespace kanbarugym.Clases
 {
     public class ClientesClass : INotifyPropertyChanged
     {
@@ -37,6 +37,18 @@ using System.Runtime.CompilerServices;
             {
                 if (_isMenuVisible == value) return;
                 _isMenuVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _activo;
+        public bool Activo
+        {
+            get => _activo;
+            set
+            {
+                if (_activo == value) return;
+                _activo = value;
                 OnPropertyChanged();
             }
         }

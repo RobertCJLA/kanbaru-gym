@@ -9,7 +9,6 @@ public partial class PagosCliente : ContentPage
 
     public PagosCliente(string id, string nombre)
     {
-
         InitializeComponent();
         Title = $"Pagos de {nombre}";
         CargarPagos(id);
@@ -18,6 +17,9 @@ public partial class PagosCliente : ContentPage
     private async void CargarPagos(string id)
     {
         pagos = await PagoLib.ObtenerPagosClientes(id);
+
+        pagos.Sort((x, y) => y.FechaInicio.CompareTo(x.FechaInicio));
+
         PagosCollection.ItemsSource = pagos;
 
         if (pagos.Count == 0)

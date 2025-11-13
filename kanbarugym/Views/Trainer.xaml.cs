@@ -8,7 +8,7 @@ namespace kanbarugym.Views;
 public partial class Trainer : ContentPage
 {
     public TrainersViewModel ViewModel { get; } = new();
-    private ImageButton? _currentGearBtn;
+    private Button? _currentGearBtn;
     private EntrenadorClass? _currentTrainer;
 
     public Trainer()
@@ -35,7 +35,7 @@ public partial class Trainer : ContentPage
 
     private void OnGearClicked(object sender, EventArgs e)
     {
-        if (sender is not ImageButton btn || btn.BindingContext is not EntrenadorClass entrenador)
+        if (sender is not Button btn || btn.CommandParameter is not EntrenadorClass entrenador)
             return;
         var overlay = this.FindByName<kanbarugym.Views.Controls.FloatingMenu>("OverlayMenu");
         if (overlay is null) return;
@@ -51,7 +51,8 @@ public partial class Trainer : ContentPage
 
         _currentGearBtn = btn;
         _currentTrainer = entrenador;
-        overlay.BindingContext = entrenador;
+        // No cambiar el BindingContext del overlay para no romper los bindings de comandos
+        overlay.TargetTrainer = entrenador; // pasar el entrenador seleccionado
         overlay.ShowFor(btn, RootGrid, EntrenadoresCollection);
     }
 }
