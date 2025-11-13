@@ -17,6 +17,10 @@ public partial class Clients : ContentPage
     {
         InitializeComponent();
         BindingContext = ViewModel;
+        MessagingCenter.Subscribe<EditarCliente>(this, "ClienteActualizado", async _ =>
+        {
+            await ViewModel.CargarClientes();
+        });
     }
 
     protected override async void OnAppearing()

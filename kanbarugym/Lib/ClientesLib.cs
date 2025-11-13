@@ -56,5 +56,25 @@ namespace kanbarugym.Lib
 
             return clientes ?? [];
         }
+        public static async Task<(bool ok, string? error)> ActualizarCliente(string id, object cliente)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(cliente);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpClient api = new APIService().ObtenerClientHttp();
+                var response = await api.PutAsync($"clientes/{id}", content);
+                if (response.IsSuccessStatusCode)
+                    return (true, null);
+
+                var body = await response.Content.ReadAsStringAsync();
+                var status = (int)response.StatusCode;
+                return (false, $"HTTP {status} - {response.ReasonPhrase}. Respuesta: {body}");
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message);
+            }
+        }
     }
 }
