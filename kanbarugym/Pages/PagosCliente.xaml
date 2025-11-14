@@ -6,153 +6,135 @@
     Title="Pagos del cliente">
 
     <StackLayout>
-        <Label x:Name="labelPagos" Text="Sin pagos" FontSize="24" HorizontalOptions="Center" FontAttributes="Bold" IsVisible="False" />
-        <ScrollView>
-            <CollectionView
-                x:Name="PagosCollection"
-                Margin="15"
-                SelectionMode="None">
+        <Label x:Name="labelPagos"
+               Text="Sin pagos"
+               FontSize="24"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"
+               IsVisible="False" />
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Border
-                            BackgroundColor="#0099FF"
+        <CollectionView x:Name="PagosCollection"
+                        Margin="15"
+                        SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <!-- Border sin Shadow -->
+                    <Border BackgroundColor="#0099FF"
                             Padding="20"
-                            Shadow="True"
                             Margin="0,10,0,0">
-                            <Border.StrokeShape>
-                                <RoundRectangle CornerRadius="10" />
-                            </Border.StrokeShape>
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10" />
+                        </Border.StrokeShape>
 
-                            <Grid
-                                RowDefinitions="Auto,Auto,Auto,Auto"
-                                ColumnDefinitions="60,70,*,*"
-                                ColumnSpacing="8"
-                                RowSpacing="12">
+                        <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                              ColumnDefinitions="60,70,*,*"
+                              ColumnSpacing="8"
+                              RowSpacing="12">
 
-                                <Label
-                                    Text="{Binding Membresia}"
-                                    FontSize="16"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    Grid.ColumnSpan="2"
-                                    Grid.Row="1" />
+                            <Label Text="{Binding Membresia}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.ColumnSpan="2"
+                                   Grid.Row="1" />
 
-                                <Label
-                                    Text="{Binding Cliente}"
-                                    FontSize="18"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.ColumnSpan="3" />
+                            <Label Text="{Binding Cliente}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation"
+                                   Grid.ColumnSpan="3" />
 
-                                <Label
-                                    Text="Emision"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.Row="2"
-                                    Grid.Column="0" />
+                            <Label Text="Emision"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="2"
+                                   Grid.Column="0" />
 
-                                <Label
-                                    Text="{Binding FechaInicio}"
-                                    FontSize="10"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.Row="3"
-                                    Grid.Column="0"
-                                    Margin="0,-10,0,0" />
+                            <Label Text="{Binding FechaInicio}"
+                                   FontSize="10"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="3"
+                                   Grid.Column="0"
+                                   Margin="0,-10,0,0" />
 
-                                <Label
-                                    Text="Expiracion"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    HorizontalOptions="Center" />
+                            <Label Text="Expiracion"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="2"
+                                   Grid.Column="1"
+                                   HorizontalOptions="Center" />
 
-                                <Label
-                                    Text="{Binding FechaFin}"
-                                    FontSize="10"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    Margin="0,-10,0,0" />
+                            <Label Text="{Binding FechaFin}"
+                                   FontSize="10"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="3"
+                                   Grid.Column="1"
+                                   Margin="0,-10,0,0" />
 
-                                <Label
-                                    Text="Monto"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.Row="2"
-                                    Grid.Column="2"
-                                    HorizontalOptions="Center" />
+                            <Label Text="Monto"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="2"
+                                   Grid.Column="2"
+                                   HorizontalOptions="Center" />
 
-                                <Label
-                                    Text="{Binding Monto, StringFormat='C$ {0}'}"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.Row="3"
-                                    Grid.Column="2"
-                                    HorizontalOptions="Center"
-                                    Margin="0,-10,0,0" />
+                            <Label Text="{Binding Monto, StringFormat='C$ {0}'}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="3"
+                                   Grid.Column="2"
+                                   HorizontalOptions="Center"
+                                   Margin="0,-10,0,0" />
 
-                                <Label
-                                    Text="Usuario"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.Row="2"
-                                    Grid.Column="3"
-                                    HorizontalOptions="Center" />
+                            <Label Text="Usuario"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="2"
+                                   Grid.Column="3"
+                                   HorizontalOptions="Center" />
 
-                                <Label
-                                    Text="{Binding Administrador}"
-                                    FontSize="10"
-                                    FontAttributes="Bold"
-                                    TextColor="White"
-                                    LineBreakMode="TailTruncation"
-                                    Grid.Row="3"
-                                    Grid.Column="3"
-                                    HorizontalOptions="Center"
-                                    Margin="0,-10,0,0" />
+                            <Label Text="{Binding Administrador}"
+                                   FontSize="10"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   Grid.Row="3"
+                                   Grid.Column="3"
+                                   HorizontalOptions="Center"
+                                   Margin="0,-10,0,0" />
 
-                                <!-- Estado ACTIVO/INACTIVO destacado -->
-                                <Label
-                                    Grid.Row="0"
-                                    Grid.ColumnSpan="4"
-                                    Text=" "
-                                    FontSize="16"
-                                    FontAttributes="Bold"
-                                    HorizontalOptions="End">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Activo}" Value="True">
-                                            <Setter Property="Text" Value="ACTIVO" />
-                                            <Setter Property="TextColor" Value="#00E676" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Activo}" Value="False">
-                                            <Setter Property="Text" Value="INACTIVO" />
-                                            <Setter Property="TextColor" Value="#FF1744" />
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
+                            <!-- Estado ACTIVO/INACTIVO destacado -->
+                            <Label Grid.Row="0"
+                                   Grid.ColumnSpan="4"
+                                   Text=" "
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="End">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Activo}" Value="True">
+                                        <Setter Property="Text" Value="ACTIVO" />
+                                        <Setter Property="TextColor" Value="#00E676" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Activo}" Value="False">
+                                        <Setter Property="Text" Value="INACTIVO" />
+                                        <Setter Property="TextColor" Value="#FF1744" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
 
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
 
-            </CollectionView>
-        </ScrollView>
+        </CollectionView>
     </StackLayout>
 </ContentPage>
