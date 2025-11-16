@@ -7,16 +7,19 @@
 
 
     <Shell.TitleView>
-        <Grid BackgroundColor="White">
+        <Grid BackgroundColor="White"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill">
             <VerticalStackLayout Margin="0,10,0,0">
                 <Label Text="Registrar Membresia" 
                    FontSize="22"
                    FontAttributes="Bold" 
-                   Padding="75,0,0,0"
+                   Padding="0,0,0,0"
+                       HorizontalOptions="Center"
                    TextColor="Black"/>
 
                 <Border StrokeThickness="0"
-                        Margin="0,0,30,0"
+                        Margin="0,0,0,0"
                    BackgroundColor="#0595EC"
                    StrokeShape="RoundRectangle 100,100"
                    HeightRequest="5"
@@ -28,6 +31,7 @@
 
 
 
+    <ScrollView>
     <VerticalStackLayout Margin="0,10,0,0">
         <Label Text="Cliente"
         FontSize="16"
@@ -138,22 +142,19 @@
             <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center" Margin="5,0">
                 <Grid>
                     <Picker x:Name="cmbMembresia"
-         Title="Selecciona una opción"
-         FontSize="13"
-         TextColor="Black"
-         TitleColor="Gray"
-         BackgroundColor="Transparent"
-         HorizontalOptions="Fill"
-         Margin="0">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Semanal</x:String>
-                                <x:String>Mensual</x:String>
-                                <x:String>Anual</x:String>
-
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
+        Title="Selecciona una opción"
+        FontSize="13"
+        TextColor="Black"
+        TitleColor="Gray"
+        BackgroundColor="Transparent"
+        HorizontalOptions="Fill"
+        Margin="0">
+    <Picker.Items>
+        <x:String>Semanal</x:String>
+        <x:String>Mensual</x:String>
+        <x:String>Anual</x:String>
+    </Picker.Items>
+</Picker>
 
                 </Grid>
 
@@ -211,4 +212,6 @@ ColumnSpacing="10">
 
 
     </VerticalStackLayout>
+    </ScrollView>
+
 </ContentPage>
