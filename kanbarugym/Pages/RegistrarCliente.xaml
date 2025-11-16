@@ -7,16 +7,19 @@
              Padding="15,0">
 
     <Shell.TitleView>
-        <Grid BackgroundColor="White">
+        <Grid BackgroundColor="White"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
             <VerticalStackLayout Margin="0,10,0,0">
                 <Label Text="Registrar nuevo cliente" 
                    FontSize="22"
                    FontAttributes="Bold" 
-                   Padding="70,0,0,0"
+                   Padding="0,0,0,0"
+                       HorizontalOptions="Center"
                    TextColor="Black"/>
 
                 <Border StrokeThickness="0"
-                        Margin="0,0,22,0"
+                        Margin="0,0,0,0"
                    BackgroundColor="#0595EC"
                    StrokeShape="RoundRectangle 100,100"
                    HeightRequest="5"

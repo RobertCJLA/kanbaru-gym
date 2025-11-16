@@ -9,20 +9,23 @@
     
 
     <Shell.TitleView>
-        <Grid BackgroundColor="White">
+        <Grid BackgroundColor="White"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill">
             <VerticalStackLayout Margin="0,10,0,0">
                 <Label Text="Editar cliente" 
                 FontSize="22"
                 FontAttributes="Bold" 
-                Padding="125,0,0,0"
+                Padding="0,0,0,0"
+                       HorizontalOptions="Center"
                 TextColor="Black"/>
 
                 <Border StrokeThickness="0"
-                     Margin="0,0,7,0"
+                     Margin="0,0,0,0"
                 BackgroundColor="#0595EC"
                 StrokeShape="RoundRectangle 100,100"
                 HeightRequest="5"
-                WidthRequest="140"
+                WidthRequest="135"
                 HorizontalOptions="Center" />
             </VerticalStackLayout>
         </Grid>
