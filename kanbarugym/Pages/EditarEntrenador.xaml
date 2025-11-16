@@ -14,9 +14,9 @@
                 <Label Text="Actualizar entrenador"
                        FontSize="22"
                        FontAttributes="Bold"
-                       Padding="20,0,0,0"/>
+                       Padding="85,0,0,0"/>
                 <Border StrokeThickness="0"
-                        Margin="0,0,80,0"
+                        Margin="0,0,0,0"
                         BackgroundColor="#0595EC"
                         HeightRequest="5"
                         WidthRequest="230"

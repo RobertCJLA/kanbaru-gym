@@ -18,20 +18,19 @@ public partial class RegstrarMembresia : ContentPage
 
         txtCliente.Text = this.name;
         txtCliente.IsEnabled = false;
-    }
 
-
-    public void OnLastPage(object sender, EventArgs e)
-    {
-        var app = Application.Current;
-        if (app != null && app.Windows.Count > 0 && app.Windows[0] != null)
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior
         {
-
-            app.Windows[0].Page = new AppShell();
-
-            Shell.Current.GoToAsync("//PanelAdministrativo");
-        }
+            IsVisible = false
+        });
     }
+
+
+    private async void OnLastPage(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
 
     public async void OnCreateMembresia(object sender, EventArgs e)
     {

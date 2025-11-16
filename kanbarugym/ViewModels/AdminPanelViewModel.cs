@@ -33,72 +33,91 @@ public class AdminPanelViewModel : INotifyPropertyChanged
  bool _isBusy;
  public bool IsBusy { get => _isBusy; private set { if (_isBusy == value) return; _isBusy = value; OnPropertyChanged(); } }
 
- public async Task LoadAsync()
- {
- try
- {
- IsBusy = true;
- var clientes = await ClientesLib.ObtenerClientes() ?? new List<ClientesClass>();
- SetCardDefaults();
- if (clientes.Count ==0) return;
+    public async Task LoadAsync()
+    {
+        try
+        {
+            IsBusy = true;
+            var clientes = await ClientesLib.ObtenerClientes() ?? new List<ClientesClass>();
+            SetCardDefaults();
+            if (clientes.Count == 0) return;
 
- var reciente = clientes.Last();
- NuevoCliente.Title = "Nuevo cliente"; NuevoCliente.Tag = "Ingreso";
- NuevoCliente.DateText = DateTime.Now.ToString("dd/MM/yy"); NuevoCliente.Name = reciente.Nombres;
+            var pagosPorCliente = new Dictionary<string, List<PagoClass>>();
+            foreach (var c in clientes)
+            {
+                try { pagosPorCliente[c.Id] = await PagoLib.ObtenerPagosClientes(c.Id) ?? new List<PagoClass>(); }
+                catch { pagosPorCliente[c.Id] = new List<PagoClass>(); }
+            }
 
- var pagosPorCliente = new Dictionary<string, List<PagoClass>>();
- foreach (var c in clientes)
- {
- try { pagosPorCliente[c.Id] = await PagoLib.ObtenerPagosClientes(c.Id) ?? new List<PagoClass>(); }
- catch { pagosPorCliente[c.Id] = new List<PagoClass>(); }
- }
+            DateTime? Parse(string? s)
+            {
+                if (string.IsNullOrWhiteSpace(s)) return null;
+                var formats = new[] { "dd/MM/yy", "dd/MM/yyyy", "yyyy-MM-dd", "MM/dd/yyyy" };
+                foreach (var f in formats)
+                    if (DateTime.TryParseExact(s, f, CultureInfo.InvariantCulture, DateTimeStyles.None, out var d))
+                        return d;
+                if (DateTime.TryParse(s, out var gen)) return gen;
+                return null;
+            }
 
- DateTime? Parse(string? s)
- {
- if (string.IsNullOrWhiteSpace(s)) return null;
- var formats = new[] { "dd/MM/yy", "dd/MM/yyyy", "yyyy-MM-dd", "MM/dd/yyyy" };
- foreach (var f in formats)
- if (DateTime.TryParseExact(s, f, CultureInfo.InvariantCulture, DateTimeStyles.None, out var d)) return d;
- if (DateTime.TryParse(s, out var gen)) return gen; return null;
- }
+            var rand = new Random();
 
- ClientesClass? fielCliente = null; DateTime? fielStart = null; string? fielMembresia = null;
- foreach (var kv in pagosPorCliente)
- {
- var first = kv.Value.Select(p => new { P = p, Start = Parse(p.FechaInicio) }).Where(x => x.Start.HasValue).OrderBy(x => x.Start).FirstOrDefault();
- if (first is null) continue;
- if (fielStart is null || first.Start!.Value < fielStart.Value)
- { fielStart = first.Start; fielCliente = clientes.FirstOrDefault(c => c.Id == kv.Key); fielMembresia = first.P.Membresia; }
- }
- if (fielCliente != null && fielStart != null)
- { ClienteFiel.Title = "Cliente fiel"; ClienteFiel.Tag = fielMembresia ?? string.Empty; ClienteFiel.DateText = fielStart.Value.ToString("dd/MM/yy"); ClienteFiel.Name = fielCliente.Nombres; }
+            // Nuevo Cliente random
+            var ultimosClientes = clientes.OrderByDescending(c => c.Id).Take(5).ToList();
+            var randomNuevo = ultimosClientes[rand.Next(ultimosClientes.Count)];
+            NuevoCliente.Title = "Nuevo cliente";
+            NuevoCliente.Tag = "Ingreso";
+            NuevoCliente.DateText = DateTime.Now.ToString("dd/MM/yy");
+            NuevoCliente.Name = randomNuevo.Nombres;
 
- ClientesClass? prontoCliente = null; DateTime? prontoFin = null; string? prontoMemb = null;
- foreach (var kv in pagosPorCliente)
- {
- var soon = kv.Value.Select(p => new { P = p, Fin = Parse(p.FechaFin), p.Activo }).Where(x => x.Fin.HasValue && x.Fin >= DateTime.Today && x.Activo).OrderBy(x => x.Fin).FirstOrDefault();
- if (soon is null) continue;
- if (prontoFin is null || soon.Fin!.Value < prontoFin.Value)
- { prontoFin = soon.Fin; prontoCliente = clientes.FirstOrDefault(c => c.Id == kv.Key); prontoMemb = soon.P.Membresia; }
- }
- if (prontoCliente != null && prontoFin != null)
- { TerminaPronto.Title = "Termina pronto"; TerminaPronto.Tag = prontoMemb ?? string.Empty; TerminaPronto.DateText = prontoFin.Value.ToString("dd/MM/yy"); TerminaPronto.Name = prontoCliente.Nombres; }
+            // Cliente fiel random
+            var clientesConPagos = pagosPorCliente.Where(kv => kv.Value.Any()).ToList();
+            if (clientesConPagos.Any())
+            {
+                var randomFiel = clientesConPagos[rand.Next(clientesConPagos.Count)];
+                var primerPago = randomFiel.Value.OrderBy(p => Parse(p.FechaInicio)).FirstOrDefault();
+                if (primerPago != null)
+                {
+                    ClienteFiel.Title = "Cliente fiel";
+                    ClienteFiel.Tag = primerPago.Membresia ?? "";
+                    ClienteFiel.DateText = Parse(primerPago.FechaInicio)?.ToString("dd/MM/yy") ?? "-";
+                    ClienteFiel.Name = clientes.First(c => c.Id == randomFiel.Key).Nombres;
+                }
+            }
 
- ClientesClass? terminadaCliente = null; DateTime? terminadaFin = null; string? terminadaMemb = null;
- foreach (var kv in pagosPorCliente)
- {
- var lastEnded = kv.Value.Select(p => new { P = p, Fin = Parse(p.FechaFin), p.Activo }).Where(x => x.Fin.HasValue && x.Fin < DateTime.Today && !x.Activo).OrderByDescending(x => x.Fin).FirstOrDefault();
- if (lastEnded is null) continue;
- if (terminadaFin is null || lastEnded.Fin!.Value > terminadaFin.Value)
- { terminadaFin = lastEnded.Fin; terminadaCliente = clientes.FirstOrDefault(c => c.Id == kv.Key); terminadaMemb = lastEnded.P.Membresia; }
- }
- if (terminadaCliente != null && terminadaFin != null)
- { Terminada.Title = "Terminada"; Terminada.Tag = terminadaMemb ?? string.Empty; Terminada.DateText = terminadaFin.Value.ToString("dd/MM/yy"); Terminada.Name = terminadaCliente.Nombres; }
- }
- finally { IsBusy = false; }
- }
+            // Termina pronto random
+            var activos = pagosPorCliente
+                .SelectMany(kv => kv.Value.Where(p => p.Activo && Parse(p.FechaFin) >= DateTime.Today)
+                .Select(p => new { ClienteId = kv.Key, Pago = p, Fin = Parse(p.FechaFin) }))
+                .ToList();
+            if (activos.Any())
+            {
+                var randomPronto = activos[rand.Next(activos.Count)];
+                TerminaPronto.Title = "Termina pronto";
+                TerminaPronto.Tag = randomPronto.Pago.Membresia ?? "";
+                TerminaPronto.DateText = randomPronto.Fin?.ToString("dd/MM/yy") ?? "-";
+                TerminaPronto.Name = clientes.First(c => c.Id == randomPronto.ClienteId).Nombres;
+            }
 
- void SetCardDefaults()
+            // Terminada random
+            var terminados = pagosPorCliente
+                .SelectMany(kv => kv.Value.Where(p => !p.Activo && Parse(p.FechaFin) < DateTime.Today)
+                .Select(p => new { ClienteId = kv.Key, Pago = p, Fin = Parse(p.FechaFin) }))
+                .ToList();
+            if (terminados.Any())
+            {
+                var randomTerm = terminados[rand.Next(terminados.Count)];
+                Terminada.Title = "Terminada";
+                Terminada.Tag = randomTerm.Pago.Membresia ?? "";
+                Terminada.DateText = randomTerm.Fin?.ToString("dd/MM/yy") ?? "-";
+                Terminada.Name = clientes.First(c => c.Id == randomTerm.ClienteId).Nombres;
+            }
+        }
+        finally { IsBusy = false; }
+    }
+
+
+    void SetCardDefaults()
  {
  NuevoCliente.Title = "Nuevo cliente"; NuevoCliente.Tag = ""; NuevoCliente.DateText = "-"; NuevoCliente.Name = "-";
  ClienteFiel.Title = "Cliente fiel"; ClienteFiel.Tag = ""; ClienteFiel.DateText = "-"; ClienteFiel.Name = "-";
