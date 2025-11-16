@@ -28,8 +28,21 @@ namespace kanbarugym.Pages
                 "Pilates"
             };
 
-            // Establecer el contexto de enlace de datos
+            
             BindingContext = this;
+
+
+            Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            {
+                IsVisible = false
+            });
+
+        }
+
+
+        private async void OnCancelButton(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
         }
 
         public RegistrarEntrenador(EntrenadorClass entrenador) : this()

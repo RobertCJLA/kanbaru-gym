@@ -87,7 +87,7 @@
  </Label.GestureRecognizers>
  </Label>
 
- <Button x:Name="GearBtn" Grid.Column="2" ImageSource="settings.png" WidthRequest="24" HeightRequest="24" Padding="0" BackgroundColor="Transparent" Clicked="OnGearClicked" CommandParameter="{Binding}" />
+ <Button x:Name="GearBtn" Grid.Column="2" ImageSource="settings.png" WidthRequest="24" HeightRequest="24" Padding="5" BackgroundColor="Transparent" Clicked="OnGearClicked" CommandParameter="{Binding}" />
  </Grid>
 
  <!-- Details (expandable) -->

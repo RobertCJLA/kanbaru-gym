@@ -18,12 +18,25 @@ namespace kanbarugym.Pages
             txtNECliente.Text = correoElectronico;
             txtNTClient.Text = telefono;
             cmbSexo.Title = sexo;
+
+
+            Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            {
+                IsVisible = false
+            });
         }
 
-        // Método controlador de eventos para el botón "Guardar"
+
+
+        private async void OnCancelButton(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+
         private async void OnEditClient(object sender, EventArgs e)
         {
-            // Validaciones básicas
+            
             if (string.IsNullOrWhiteSpace(txtNombreCliente.Text))
             { await DisplayAlert("Error", "El nombre es obligatorio.", "OK"); return; }
 
@@ -59,7 +72,6 @@ namespace kanbarugym.Pages
                 return;
             }
 
-            // Notificar a la lista para que refresque
             MessagingCenter.Send(this, "ClienteActualizado");
             await DisplayAlert("Éxito", "Cliente actualizado correctamente.", "OK");
             await Navigation.PopAsync();

@@ -19,7 +19,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <!-- Border sin Shadow -->
+
                     <Border BackgroundColor="#0099FF"
                             Padding="20"
                             Margin="0,10,0,0">

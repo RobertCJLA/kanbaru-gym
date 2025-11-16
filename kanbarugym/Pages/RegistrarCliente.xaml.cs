@@ -12,7 +12,19 @@ public partial class RegistrarCliente : ContentPage
     public RegistrarCliente()
     {
         InitializeComponent();
+
+        Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+        {
+            IsVisible = false
+        });
     }
+
+    private async void OnCancelButton(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
+
 
     public async void OnCreateCliente(object sender, EventArgs e)
     {
