@@ -149,7 +149,17 @@
                             <VerticalStackLayout BackgroundColor="#0595EC" Padding="20,10" Spacing="6">
                                 <Label Text="{Binding CorreoElectronico}" TextColor="White" FontSize="18"/>
                                 <Label Text="{Binding Telefono}" TextColor="White" FontSize="18"/>
-                                <Label Text="{Binding Sexo}" TextColor="White" FontSize="18"/>
+                                <Label TextColor="White" FontSize="18">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Sexo}" Value="M">
+                                            <Setter Property="Text" Value="Masculino"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger TargetType="Label" Binding="{Binding Sexo}" Value="F">
+                                            <Setter Property="Text" Value="Femenino"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
                                 <Label Text="{Binding FechaNacimiento, Converter={StaticResource AgeFromBirthdateConverter}, StringFormat='Edad: {0} años'}" TextColor="White" FontSize="18"/>
                             </VerticalStackLayout>
                         </Border>

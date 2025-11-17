@@ -36,33 +36,59 @@ namespace kanbarugym.Pages
 
         private async void OnEditClient(object sender, EventArgs e)
         {
-            
-            if (string.IsNullOrWhiteSpace(txtNombreCliente.Text))
-            { await DisplayAlert("Error", "El nombre es obligatorio.", "OK"); return; }
+            string nombres = txtNombreCliente.Text;
+            string fechaNacimiento = txtFechaNacimiento.Text;
+            string correoElectronico = txtNECliente.Text;
+            string telefono = txtNTClient.Text;
+            string? sexo = (cmbSexo.SelectedItem?.ToString() == "Femenino") ? "F" : (cmbSexo.SelectedItem != null ? "M" : null);
 
-            if (string.IsNullOrWhiteSpace(txtFechaNacimiento.Text) ||
-                !DateTime.TryParse(txtFechaNacimiento.Text, out var fn))
-            { await DisplayAlert("Error", "Fecha de nacimiento inv·lida.", "OK"); return; }
+            Regex nameRegex = new(@"^(?:[A-Z¡…Õ”⁄][a-z·ÈÌÛ˙]+(?:\s[A-Z¡…Õ”⁄][a-z·ÈÌÛ˙]+){0,4})$");
+            Regex emailRegex = new(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$");
+            Regex dateRegex = new(@"^[0-9]{4}-[0-9]{2}-[0-9]{2}$");
+            Regex phoneRegex = new(@"^[0-9]{8}$");
 
-            if (string.IsNullOrWhiteSpace(txtNECliente.Text) ||
-                !Regex.IsMatch(txtNECliente.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-            { await DisplayAlert("Error", "Correo electrÛnico inv·lido.", "OK"); return; }
+            if (string.IsNullOrWhiteSpace(nombres) ||
+                string.IsNullOrWhiteSpace(fechaNacimiento) ||
+                string.IsNullOrWhiteSpace(correoElectronico) ||
+                string.IsNullOrWhiteSpace(telefono) ||
+                string.IsNullOrWhiteSpace(sexo))
+            {
+                await DisplayAlert("Error", "Por favor, complete todos los campos.", "OK");
+                return;
+            }
 
-            if (string.IsNullOrWhiteSpace(txtNTClient.Text) || txtNTClient.Text.Replace(" ", "").Length < 7)
-            { await DisplayAlert("Error", "N˙mero de telÈfono inv·lido.", "OK"); return; }
+            if (!nameRegex.IsMatch(nombres))
+            {
+                await DisplayAlert("Error", "Nombre inv·lido.", "OK");
+                return;
+            }
 
-            var sexo = string.IsNullOrWhiteSpace(cmbSexo.Title) ? null : cmbSexo.Title;
-            if (string.IsNullOrWhiteSpace(sexo))
-            { await DisplayAlert("Error", "Selecciona el sexo.", "OK"); return; }
+            if (!emailRegex.IsMatch(correoElectronico))
+            {
+                await DisplayAlert("Error", "Correo electrÛnico inv·lido.", "OK");
+                return;
+            }
+
+            if (!dateRegex.IsMatch(fechaNacimiento))
+            {
+                await DisplayAlert("Error", "Fecha de nacimiento inv·lida. Use el formato AAAA-MM-DD.", "OK");
+                return;
+            }
+
+            if (!phoneRegex.IsMatch(telefono))
+            {
+                await DisplayAlert("Error", "N˙mero de telÈfono inv·lido. Debe contener exactamente 8 dÌgitos.", "OK");
+                return;
+            }
 
             var body = new
             {
-                id = _id,
-                nombres = txtNombreCliente.Text.Trim(),
-                fechaNacimiento = fn.ToString("yyyy-MM-dd"),
-                correoElectronico = txtNECliente.Text.Trim(),
-                telefono = txtNTClient.Text.Trim(),
-                sexo = sexo
+                id = "",
+                nombres,
+                fechaNacimiento,
+                correoElectronico,
+                telefono,
+                sexo
             };
 
             var (ok, error) = await ClientesLib.ActualizarCliente(_id, body);
@@ -72,7 +98,6 @@ namespace kanbarugym.Pages
                 return;
             }
 
-            MessagingCenter.Send(this, "ClienteActualizado");
             await DisplayAlert("…xito", "Cliente actualizado correctamente.", "OK");
             await Navigation.PopAsync();
         }
